@@ -15,9 +15,9 @@ export default {
     return {
       word: "",
       correctsLetter: "",
-      inputLetter: "",
       counterLetter: 0,
       wordTypingCounter: 0,
+      tempWord: "",
     };
   },
   created() {
@@ -30,40 +30,27 @@ export default {
       );
       const [data] = await res.data;
       this.word = data;
+      this.tempWord = data;
     },
-    checkWord() {
-      console.log(this.word[this.counterLetter]);
-      if (this.word[this.counterLetter] === this.inputLetter) {
+    checkWord(letter) {
+      if (this.tempWord[this.counterLetter] === letter) {
         this.counterLetter++;
+        this.word = this.word.replace(letter, "");
 
-        const accertLetter = this.word.slice(0, this.counterLetter);
-        console.log(accertLetter);
-        // this.word = this.word.replace(accertLetter, "");
-        this.correctsLetter = accertLetter;
+        this.correctsLetter = this.tempWord.slice(0, this.counterLetter);
         if (this.word.length === 0) {
           this.getWord();
           this.counterLetter = 0;
+          this.correctsLetter = "";
         }
       }
     },
   },
-  computed: {
-    cWord() {
-      return this.word;
-    },
-    cInputLetter() {
-      return this.inputLetter;
-    },
-  },
-  watch: {
-    inputLetter() {
-      this.checkWord();
-    },
-  },
+  computed: {},
+  watch: {},
   mounted() {
-    window.addEventListener("keypress", (e) => {
-      console.log(e.key);
-      this.inputLetter = e.key;
+    window.addEventListener("keypress", (ev) => {
+      this.checkWord(ev.key);
     });
   },
 };
