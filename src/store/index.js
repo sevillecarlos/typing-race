@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     time: -1,
     startGame: false,
+    token: "",
   },
   mutations: {
     setTime(state, payload) {
@@ -16,22 +17,33 @@ export default new Vuex.Store({
     setStartGame(state, payload) {
       state.startGame = payload;
     },
+    setToken(state, payload) {
+      state.token = payload;
+      console.log(payload);
+    },
   },
   actions: {
-    async signIn(_, payload) {
+    async signIn({ commit }, payload) {
       const res = await axios.post(`http://localhost:5000/signin`, payload);
       const { jwtToken } = await res.data;
-
+      commit("setToken", jwtToken);
       localStorage.setItem("@uth", jwtToken);
     },
-    async signUp(_, payload) {
+    async signUp({ commit }, payload) {
       const res = await axios.post(`http://localhost:5000/signup`, payload);
       const { jwtToken } = await res.data;
-
+      commit("setToken", jwtToken);
       localStorage.setItem("@uth", jwtToken);
     },
-    signOut() {
+    getToken({ commit }) {
+      const token = localStorage.getItem("@uth");
+      if (token) {
+        commit("setToken", token);
+      }
+    },
+    signOut({ commit }) {
       localStorage.removeItem("@uth");
+      commit("setToken", "");
     },
   },
   modules: {},
