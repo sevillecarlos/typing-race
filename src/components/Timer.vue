@@ -7,14 +7,22 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       time: 5,
     };
   },
-  created() {
-    this.timer();
+  watch: {
+    startGame() {
+      this.startGame && this.timer();
+    },
+  },
+  computed: {
+    ...mapState({
+      startGame: "startGame",
+    }),
   },
   methods: {
     timer() {
@@ -23,6 +31,7 @@ export default {
         this.$store.commit("setTime", this.time);
         if (this.time === 0) {
           clearInterval(timerCounter);
+          this.$store.commit("setStartGame", false);
         }
       }, 1000);
     },

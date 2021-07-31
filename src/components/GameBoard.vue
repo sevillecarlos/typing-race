@@ -1,6 +1,9 @@
 <template>
   <div class="game-board">
     <div class="game-running" v-if="time !== 0">
+      <button v-if="!startGame" @click="startCounter" class="restart-btn">
+        Start Game
+      </button>
       <Timer />
       <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
         correctsLetter
@@ -62,7 +65,10 @@ export default {
     restartGame() {
       this.clearState();
       this.getWord();
-      this.$store.commit("setTime", 5);
+      this.$store.commit("setTime", -1);
+    },
+    startCounter() {
+      this.$store.commit("setStartGame", true);
     },
     clearState() {
       (this.word = ""),
@@ -75,6 +81,7 @@ export default {
   computed: {
     ...mapState({
       time: "time",
+      startGame: "startGame",
     }),
   },
   watch: {},
