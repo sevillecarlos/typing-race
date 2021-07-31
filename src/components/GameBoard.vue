@@ -1,16 +1,30 @@
 <template>
   <div class="game-board">
-    <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
-      correctsLetter
-    }}</span
-    ><span class="word">{{ word }}</span>
+    <div class="game-running" v-if="time !== 0">
+      <Timer />
+      <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
+        correctsLetter
+      }}</span
+      ><span class="word">{{ word }}</span>
+    </div>
+    <div class="game-stop" v-else>
+      <span class="timeout-msg">Your time finish</span>
+      <br />
+      <button @click="restartGame" class="restart-btn">Restart Game</button>
+    </div>
     <br />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Timer from "./Timer.vue";
+import { mapState } from "vuex";
 export default {
+  name: "GameBoard",
+  components: {
+    Timer,
+  },
   data() {
     return {
       word: "",
@@ -45,8 +59,24 @@ export default {
         }
       }
     },
+    restartGame() {
+      this.clearState();
+      this.getWord();
+      this.$store.commit("setTime", 5);
+    },
+    clearState() {
+      (this.word = ""),
+        (this.correctsLetter = ""),
+        (this.counterLetter = 0),
+        (this.wordTypingCounter = 0),
+        (this.tempWord = "");
+    },
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      time: "time",
+    }),
+  },
   watch: {},
   mounted() {
     window.addEventListener("keypress", (ev) => {
@@ -58,7 +88,7 @@ export default {
 
 <style>
 .game-board {
-  background-color: blue;
+  background-color: rgb(69, 82, 39);
   width: 50%;
   margin: auto;
   padding: 50px;
@@ -66,7 +96,7 @@ export default {
 .word {
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: brown;
+  color: rgb(0, 0, 0);
   font-size: 70px;
 }
 .input-word {
@@ -78,5 +108,14 @@ export default {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 70px;
+}
+.timeout-msg {
+  font-size: 80px;
+  color: black;
+}
+.restart-btn {
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 20px;
 }
 </style>
