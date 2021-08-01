@@ -44,28 +44,37 @@
       </template>
       <div class="game-board">
         <div class="game-running">
-          <div v-if="token" class="user-score-board">
-            <span class="user-level-score">
-              {{ userName }} is a
-              <span class="level-label">{{ userLevel }}</span>
-            </span>
-            <span class="user-points">Points: {{ userPoints }}</span>
-          </div>
-          <br />
-          <button v-if="!startGame" @click="startCounter" class="restart-btn">
-            Start Game
-          </button>
-          <Timer />
-          <button class="restart-btn" v-b-toggle.sidebar-1>Show Rules</button>
-          <br />
-          <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
-            correctsLetter
-          }}</span
-          ><span class="word">{{ word }}</span>
-          <br />
-          <button v-if="startGame" @click="pauseGameBoard">
-            {{ pauseGame ? "Resume" : "Pause" }}
-          </button>
+          <b-overlay :show="prepareTime !== 0 && showPrepare" rounded="sm">
+            <template #overlay>
+              <div class="d-flex align-items-center">
+                <div class="prepare-time">
+                  {{ prepareTime }}
+                </div>
+              </div>
+            </template>
+            <div v-if="token" class="user-score-board">
+              <span class="user-level-score">
+                {{ userName }} is a
+                <span class="level-label">{{ userLevel }}</span>
+              </span>
+              <span class="user-points">Points: {{ userPoints }}</span>
+            </div>
+            <br />
+            <button v-if="!startGame" @click="startCounter" class="restart-btn">
+              Start Game
+            </button>
+            <Timer />
+            <button class="restart-btn" v-b-toggle.sidebar-1>Show Rules</button>
+            <br />
+            <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
+              correctsLetter
+            }}</span
+            ><span class="word">{{ word }}</span>
+            <br />
+            <button v-if="startGame" @click="pauseGameBoard">
+              {{ pauseGame ? "Resume" : "Pause" }}
+            </button>
+          </b-overlay>
         </div>
         <br />
       </div>
@@ -90,6 +99,7 @@ export default {
       wordTypingCounter: 0,
       tempWord: "",
       completeWordCounter: 0,
+      showPrepare: false,
     };
   },
   created() {
@@ -133,9 +143,22 @@ export default {
     pauseGameBoard() {
       this.$store.commit("setPauseGame", !this.pauseGame);
     },
+
     startCounter() {
-      this.$store.commit("setStartGame", true);
+      this.showPrepare = true;
+      this.$store.commit("setPrepareTime", 3);
+      const countPrepareTime = setInterval(() => {
+        let prepareTime = this.prepareTime;
+        prepareTime--;
+        console.log(prepareTime);
+        this.$store.commit("setPrepareTime", prepareTime);
+        if (this.prepareTime === 0) {
+          clearInterval(countPrepareTime);
+          this.$store.commit("setStartGame", true);
+        }
+      }, 1000);
     },
+
     clearState() {
       (this.word = ""),
         (this.correctsLetter = ""),
@@ -155,6 +178,7 @@ export default {
       userLevel: "userLevel",
       userPoints: "userPoints",
       pauseGame: "pauseGame",
+      prepareTime: "prepareTime",
     }),
     startGameKeyEvent() {
       return this.startGame;

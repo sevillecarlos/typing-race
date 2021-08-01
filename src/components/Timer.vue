@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       timerCounter: null,
+      prepareTimer: null,
     };
   },
   watch: {

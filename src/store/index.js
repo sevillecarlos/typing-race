@@ -8,6 +8,7 @@ import { jwtDecoded } from "../helper/jwtDecoded";
 export default new Vuex.Store({
   state: {
     time: 5,
+    prepareTime: 3,
     startGame: false,
     token: "",
     userPoints: 0,
@@ -20,6 +21,9 @@ export default new Vuex.Store({
   mutations: {
     setTime(state, payload) {
       state.time = payload;
+    },
+    setPrepareTime(state, payload) {
+      state.prepareTime = payload;
     },
     setStartGame(state, payload) {
       state.startGame = payload;
