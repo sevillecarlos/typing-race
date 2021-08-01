@@ -38,15 +38,15 @@
           <b-avatar
             variant="primary"
             class="avatar-user"
+            :src="formSignUp.userPhoto"
           >
           </b-avatar>
           <br />
-          <!-- <b-form-file
+          <b-form-file
             @change="uploadPhotoUser"
-            v-model="file"
             class="mt-3 uploader-photo"
             plain
-          ></b-form-file> -->
+          ></b-form-file>
 
           <b-form-group
             id="input-group-1"
@@ -119,9 +119,9 @@ export default {
         fullName: "",
         email: "",
         password: "",
-        // userPhoto: null,
+        userPhoto: null,
       },
-      file: "",
+      file: [],
     };
   },
   methods: {
@@ -133,20 +133,14 @@ export default {
       e.preventDefault();
       this.$store.dispatch("signUp", this.formSignUp);
     },
-    uploadPhotoUser() {
-      //   const fileReader = new FileReader();
-      //   fileReader.onload = (e) => {
-      //     this.formSignUp.userPhoto = e.target.result;
-      //   };
-      //   fileReader.readAsDataURL(this.file);
-      //   console.log(this.formSignUp.userPhoto)
-      //   const reader = new FileReader(this.file);
-      //   reader.readAsDataURL(this.file);
-      //   console.log(reader)
-      //   reader.onload = (e) => {
-      //     console.log(e.target.result);
-      //     this.formSignUp.userPhoto = e.target.result;
-      //   };
+    uploadPhotoUser(e) {
+      const image = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+
+      reader.onload = (e) => {
+        this.formSignUp.userPhoto = e.target.result;
+      };
     },
   },
 };
@@ -162,7 +156,5 @@ export default {
   height: 100px !important;
   background-color: darkcyan !important;
   font-size: 50px !important;
-}
-.uploader-photo {
 }
 </style>

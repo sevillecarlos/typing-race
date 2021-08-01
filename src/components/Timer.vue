@@ -22,8 +22,13 @@ export default {
     pauseGame() {
       if (this.pauseGame) {
         clearInterval(this.timerCounter);
-      } else {
+      }
+    },
+    prepareTimePause() {
+      console.log(this.prepareTimePause);
+      if (this.prepareTimePause) {
         this.timer();
+        this.$store.commit("setPrepareTimePause", false);
       }
     },
   },
@@ -32,6 +37,7 @@ export default {
       startGame: "startGame",
       time: "time",
       pauseGame: "pauseGame",
+      prepareTimePause: "prepareTimePause",
     }),
   },
   methods: {

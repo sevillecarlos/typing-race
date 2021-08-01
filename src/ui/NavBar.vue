@@ -48,13 +48,10 @@ export default {
     }
   },
   watch: {
-    userName() {
-      // console.log(this.userName);
-      this.firstName = this.userName;
-    },
-    userEmail() {
-      this.email = this.userEmail;
-    },
+    token(){
+       this.$store.dispatch("getUserData", this.token);
+       this.$router.push(`/`);
+    }
   },
   computed: {
     ...mapState({

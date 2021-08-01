@@ -6,13 +6,13 @@
           noob x 0 points
         </p>
         <p>
-          pro x 20 points
+          pro x 50 points
         </p>
         <p>
-          master x 30 points
+          master x 60 points
         </p>
         <p>
-          leave your mom basement please x 40 points
+          leave your mom basement please x 70 points
         </p>
 
         <b-img
@@ -33,12 +33,14 @@
             </button>
             <br />
             <span>You complete {{ completeWordCounter }} words</span>
-            <br />
-            <span v-if="!token"
-              >Not sing in? Sign In so you can up level and become a typing race
-              master</span
-            >
-            <a href="/authentication">Sing In</a>
+            <br />.
+            <div v-if="!token">
+              <span
+                >Not sing in? Sign In so you can up level and become a typing
+                race master</span
+              >
+              <a href="/authentication">Sing In</a>
+            </div>
           </div>
         </div>
       </template>
@@ -138,14 +140,22 @@ export default {
       }
       this.clearState();
       this.getWord();
-      this.$store.commit("setTime", 5);
+      this.$store.commit("setTime", this.token ? this.time : 45);
     },
     pauseGameBoard() {
       this.$store.commit("setPauseGame", !this.pauseGame);
+      this.showPrepare = true;
+
+      if (!this.pauseGame) {
+        this.prepareTimeCounter("setPrepareTimePause", true);
+      }
     },
 
     startCounter() {
       this.showPrepare = true;
+      this.prepareTimeCounter("setStartGame", true);
+    },
+    prepareTimeCounter(mutation, value) {
       this.$store.commit("setPrepareTime", 3);
       const countPrepareTime = setInterval(() => {
         let prepareTime = this.prepareTime;
@@ -154,11 +164,10 @@ export default {
         this.$store.commit("setPrepareTime", prepareTime);
         if (this.prepareTime === 0) {
           clearInterval(countPrepareTime);
-          this.$store.commit("setStartGame", true);
+          this.$store.commit(mutation, value);
         }
       }, 1000);
     },
-
     clearState() {
       (this.word = ""),
         (this.correctsLetter = ""),
@@ -179,6 +188,7 @@ export default {
       userPoints: "userPoints",
       pauseGame: "pauseGame",
       prepareTime: "prepareTime",
+      prepareTimePause: "prepareTimePause",
     }),
     startGameKeyEvent() {
       return this.startGame;
