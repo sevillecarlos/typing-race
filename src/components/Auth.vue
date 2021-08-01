@@ -38,7 +38,6 @@
           <b-avatar
             variant="primary"
             class="avatar-user"
-            :src="formSignUp.userPhoto"
           >
           </b-avatar>
           <br />
@@ -120,7 +119,7 @@ export default {
         fullName: "",
         email: "",
         password: "",
-        userPhoto: null,
+        // userPhoto: null,
       },
       file: "",
     };

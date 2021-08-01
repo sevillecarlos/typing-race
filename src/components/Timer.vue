@@ -10,9 +10,7 @@
 import { mapState } from "vuex";
 export default {
   data() {
-    return {
-      time: 5,
-    };
+    return {};
   },
   watch: {
     startGame() {
@@ -22,13 +20,15 @@ export default {
   computed: {
     ...mapState({
       startGame: "startGame",
+      time: "time",
     }),
   },
   methods: {
     timer() {
       const timerCounter = setInterval(() => {
-        this.time--;
-        this.$store.commit("setTime", this.time);
+        let timeTemp = this.time;
+        timeTemp--;
+        this.$store.commit("setTime", timeTemp);
         if (this.time === 0) {
           clearInterval(timerCounter);
           this.$store.commit("setStartGame", false);
