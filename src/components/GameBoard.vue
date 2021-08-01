@@ -62,6 +62,10 @@
             correctsLetter
           }}</span
           ><span class="word">{{ word }}</span>
+          <br />
+          <button v-if="startGame" @click="pauseGameBoard">
+            {{ pauseGame ? "Resume" : "Pause" }}
+          </button>
         </div>
         <br />
       </div>
@@ -90,7 +94,8 @@ export default {
   },
   created() {
     this.getWord();
-    this.$store.dispatch("getUserGameData", this.userEmail);
+
+    this.token && this.$store.dispatch("getUserGameData", this.userEmail);
   },
   methods: {
     async getWord() {
@@ -123,7 +128,10 @@ export default {
       }
       this.clearState();
       this.getWord();
-      this.$store.commit("setTime", 45);
+      this.$store.commit("setTime", 5);
+    },
+    pauseGameBoard() {
+      this.$store.commit("setPauseGame", !this.pauseGame);
     },
     startCounter() {
       this.$store.commit("setStartGame", true);
@@ -146,6 +154,7 @@ export default {
       userEmail: "userEmail",
       userLevel: "userLevel",
       userPoints: "userPoints",
+      pauseGame: "pauseGame",
     }),
     startGameKeyEvent() {
       return this.startGame;
@@ -159,7 +168,7 @@ export default {
   },
   mounted() {
     window.addEventListener("keypress", (ev) => {
-      this.startGameKeyEvent && this.checkWord(ev.key);
+      this.startGameKeyEvent && this.checkWord(ev.key.toLowerCase());
     });
   },
 };

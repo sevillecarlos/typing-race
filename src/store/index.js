@@ -7,7 +7,7 @@ import { jwtDecoded } from "../helper/jwtDecoded";
 
 export default new Vuex.Store({
   state: {
-    time: 45,
+    time: 5,
     startGame: false,
     token: "",
     userPoints: 0,
@@ -15,6 +15,7 @@ export default new Vuex.Store({
     userEmail: "",
     points: "",
     userLevel: "",
+    pauseGame: false,
   },
   mutations: {
     setTime(state, payload) {
@@ -38,6 +39,10 @@ export default new Vuex.Store({
     },
     setUserLevel(state, payload) {
       state.userLevel = payload;
+    },
+    setPauseGame(state, payload) {
+      state.pauseGame = payload;
+      console.log(payload);
     },
   },
   actions: {
