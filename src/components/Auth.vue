@@ -35,11 +35,7 @@
       </b-tab>
       <b-tab title="Tab 2">
         <b-form @submit="onSubmitSignUp">
-          <b-avatar
-            variant="primary"
-            class="avatar-user"
-            :src="formSignUp.userPhoto"
-          >
+          <b-avatar variant="primary" class="avatar-user" :src="userPhoto">
           </b-avatar>
           <br />
           <b-form-file
@@ -119,9 +115,10 @@ export default {
         fullName: "",
         email: "",
         password: "",
-        userPhoto: null,
+        // userPhoto: null,
       },
       file: [],
+      userPhoto: null,
     };
   },
   methods: {
@@ -139,7 +136,7 @@ export default {
       reader.readAsDataURL(image);
 
       reader.onload = (e) => {
-        this.formSignUp.userPhoto = e.target.result;
+        this.userPhoto = e.target.result;
       };
     },
   },
