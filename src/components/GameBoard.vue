@@ -1,76 +1,78 @@
 <template>
   <div>
     <SideBar />
-    <b-overlay :show="time === 0" rounded="sm">
+    <b-overlay
+      :show="prepareTime !== 0 && showPrepare"
+      rounded="lg"
+      class="overlay-prepare"
+      variant="dark"
+      opacity="0.90"
+    >
       <template #overlay>
-        <div class="d-flex align-items-center">
-          <div class="game-stop">
-            <span class="timeout-msg">Your time finish</span>
-            <br />
-            <button @click="restartGame" class="restart-btn">
-              Restart Game
-            </button>
-            <br />
-            <span>You complete {{ completeWordCounter }} words</span>
-            <br />.
-            <div v-if="!token">
-              <span
-                >Not sing in? Sign In so you can up level and become a typing
-                race master</span
-              >
-              <a href="/authentication">Sing In</a>
-            </div>
+        <div class="overlay-content">
+          <div>
+            <span class="prepare-time">
+              {{ prepareTime }}
+            </span>
+          </div>
+
+          <div class="prepare-msg-container">
+            <p class="ready-msg" v-if="prepareTime === 3">
+              Get ready to type.
+            </p>
+            <p class="step-msg" v-else-if="prepareTime === 2">Ready?</p>
+            <p class="go-msg" v-else>Go!</p>
           </div>
         </div>
       </template>
-      <div class="game-board">
-        <div class="game-running">
-          <b-overlay
-            :show="prepareTime !== 0 && showPrepare"
-            rounded="lg"
-            class="overlay-prepare"
-            variant="dark"
-            opacity="0.90"
-          >
-            <template #overlay>
-              <div class="overlay-content">
-                <div>
-                  <span class="prepare-time">
-                    {{ prepareTime }}
-                  </span>
-                </div>
-
-                <div class="prepare-msg-container">
-                  <p class="ready-msg" v-if="prepareTime === 3">
-                    Get ready to typing.
-                  </p>
-                  <p class="step-msg" v-else-if="prepareTime === 2">Ready?</p>
-                  <p class="go-msg" v-else>Go!</p>
-                </div>
+      <b-overlay :show="time === 0" rounded="sm" variant="dark" opacity="0.90">
+        <template #overlay>
+          <div class="d-flex align-items-center">
+            <div class="game-stop">
+              <span class="timeout-msg">Your time finish</span>
+              <br />
+              <button @click="restartGame" class="restart-btn">
+                Restart Game
+              </button>
+              <br />
+              <span class="complete-word-msg"
+                >You complete {{ completeWordCounter }} words</span
+              >
+              <br />.
+              <div v-if="!token">
+                <span
+                  >Not sing in? Sign In so you can up level and become a typing
+                  race master</span
+                >
+                <a href="/authentication">Sing In</a>
               </div>
-            </template>
-
+            </div>
+          </div>
+        </template>
+        <div class="game-board">
+          <div class="game-running">
             <div v-if="token" class="user-score-board">
               <span class="user-level-score">
-                {{ userName }} is a
+                <span>Level:</span>
                 <span class="level-label">{{ userLevel }}</span>
               </span>
-              <span class="user-points">Points: {{ userPoints }}</span>
+              <div class="points-container">
+                <span class="user-points"
+                  >Points: <span class="points">{{ userPoints }}</span>
+                </span>
+              </div>
             </div>
             <br />
-            <Timer />
-            <div class="word-container">
+            <div class="game-container">
+              <Timer />
+
               <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
                 correctsLetter
               }}</span
               ><span class="word">{{ word }}</span>
             </div>
-            <div class="btn-container">
-              <button
-                v-if="!startGame"
-                @click="startCounter"
-                class="restart-btn"
-              >
+            <div v-if="!startGame" class="btn-container">
+              <button @click="startCounter" class="start-btn">
                 Start Game
               </button>
 
@@ -78,14 +80,19 @@
                 Show Rules
               </button>
             </div>
-
-            <button v-if="startGame" @click="pauseGameBoard">
-              {{ pauseGame ? "Resume" : "Pause" }}
-            </button>
-          </b-overlay>
+            <div class="pause-btn-container">
+              <button
+                class="pause-btn"
+                v-if="startGame"
+                @click="pauseGameBoard"
+              >
+                {{ pauseGame ? "Resume" : "Pause" }}
+              </button>
+            </div>
+          </div>
+          <br />
         </div>
-        <br />
-      </div>
+      </b-overlay>
     </b-overlay>
   </div>
 </template>
@@ -228,18 +235,21 @@ export default {
 }
 .prepare-time {
   font-size: 80px;
-  color: azure;
+  color: beige;
   font-weight: bold;
 }
 .word {
   text-transform: uppercase;
   letter-spacing: 5px;
   color: rgb(0, 0, 0);
-  font-size: 120px;
+  font-size: 100px;
   font-weight: bold;
 }
-.word-container {
-  margin: auto;
+.game-container {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+
   text-align: center;
 }
 .input-word {
@@ -247,7 +257,7 @@ export default {
   visibility: hidden;
 }
 .correct-letter {
-  color: azure;
+  color: beige;
   text-transform: uppercase;
   letter-spacing: 5px;
   font-weight: bold;
@@ -255,25 +265,33 @@ export default {
 }
 .timeout-msg {
   font-size: 80px;
-  color: black;
+  color: beige;
+  font-weight: bold;
 }
 .user-points {
   color: black;
-  font-size: 30px;
+  font-size: 20px;
 }
 .level-label {
-  background-color: darkblue;
-  color: aliceblue;
-  border-radius: 20px;
-  padding: 20px;
+  font-weight: bold;
+  font-size: 25px;
+  padding: 2.5px;
+  background: rgba(0, 0, 255, 0.445);
+  border-top: 2px solid black !important;
+  border-bottom: 2px solid black !important;
 }
 .user-level-score {
   font-size: 20px;
+  float: left;
   color: black;
 }
 .btn-container {
   text-align: center;
   padding: 10px;
+}
+.game-stop {
+  text-align: center;
+  padding: 15px;
 }
 .btn-container button {
   border: none;
@@ -284,21 +302,62 @@ export default {
   border-top: 2px solid black !important;
   border-bottom: 2px solid black !important;
 }
-.restart-btn {
+.points-container {
+  float: right;
+}
+.points {
+  font-weight: bold;
+  font-size: 30px;
+  padding: 1px;
+  border-top: 2px solid black !important;
+  border-bottom: 2px solid black !important;
+  background: rgba(255, 255, 0, 0.527);
+}
+.start-btn {
   background: rgba(128, 255, 0, 0.295);
 }
 .show-rules-btn {
   background: rgba(0, 153, 255, 0.295);
 }
 .btn-container button:hover {
-  color: azure;
+  color: beige;
 }
 .prepare-msg-container {
   font-size: 40px;
+  color: beige;
+}
+.complete-word-msg {
+  color: beige;
+  font-size: 25px;
   font-weight: bold;
-  color: azure;
 }
 .overlay-content {
   text-align: center;
+}
+.pause-btn-container {
+  text-align: center;
+}
+.restart-btn {
+  background: rgba(143, 187, 108, 0.747);
+  font-size: 20px;
+  padding: 5px;
+  font-weight: bold;
+  border: none;
+  border-top: 2px solid black !important;
+  border-bottom: 2px solid black !important;
+}
+.restart-btn:hover {
+  color: beige !important;
+}
+.pause-btn {
+  background: rgba(74, 75, 77, 0.747);
+  font-size: 20px;
+  padding: 5px;
+  border: none;
+  border-top: 2px solid black !important;
+  border-bottom: 2px solid black !important;
+}
+.pause-btn:hover {
+  color: beige !important;
 }
 </style>

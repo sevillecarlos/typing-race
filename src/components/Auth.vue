@@ -1,6 +1,11 @@
 <template>
   <div class="login">
-    <b-tabs class="tab-auth" pills nav-class="item-tab" nav-wrapper-class="control-nav">
+    <b-tabs
+      class="tab-auth"
+      pills
+      nav-class="item-tab"
+      nav-wrapper-class="control-nav"
+    >
       <b-tab
         title-link-class="title-tab"
         title="Sign In"
@@ -8,6 +13,15 @@
         class="tab-sign-in"
       >
         <b-form @submit="onSubmitSignIn" class="form-sign-in">
+          <div class="logo-container">
+            <h4>Sign In</h4>
+            <b-img
+              :src="logo"
+              class="brand-logo"
+              fluid
+              alt="logo image"
+            ></b-img>
+          </div>
           <b-form-group
             id="input-group-1"
             label="Email address:"
@@ -23,7 +37,7 @@
           </b-form-group>
           <b-form-group
             id="input-group-2"
-            label="Your Email:"
+            label="Your Password:"
             label-for="input-2"
           >
             <b-form-input
@@ -42,14 +56,25 @@
       </b-tab>
       <b-tab title="Sing Up" title-link-class="title-tab">
         <b-form @submit="onSubmitSignUp" class="form-sign-up">
-          <b-avatar variant="primary" class="avatar-user" :src="userPhoto">
-          </b-avatar>
-          <br />
-          <b-form-file
-            @change="uploadPhotoUser"
-            class="mt-3 uploader-photo"
-            plain
-          ></b-form-file>
+          <div class="logo-container">
+            <h4>Sign Up</h4>
+            <b-img
+              :src="logo"
+              class="brand-logo"
+              fluid
+              alt="logo image"
+            ></b-img>
+          </div>
+          <div class="user-photo-container">
+            <b-avatar variant="primary" class="avatar-user" :src="userPhoto">
+            </b-avatar>
+            <br />
+            <b-form-file
+              @change="uploadPhotoUser"
+              class="mt-3 uploader-photo"
+              plain
+            ></b-form-file>
+          </div>
 
           <b-form-group
             id="input-group-1"
@@ -114,6 +139,8 @@
 
 <script>
 import { mapState } from "vuex";
+import logoImage from "../assets/logo-typing-race.png";
+
 export default {
   data() {
     return {
@@ -129,6 +156,7 @@ export default {
       },
       file: [],
       userPhoto: null,
+      logo: logoImage,
     };
   },
   computed: {
@@ -180,8 +208,8 @@ export default {
   color: rgb(0, 0, 0) !important;
 }
 .avatar-user {
-  width: 100px !important;
-  height: 100px !important;
+  width: 70px !important;
+  height: 70px !important;
   background-color: darkcyan !important;
   font-size: 50px !important;
 }
@@ -224,12 +252,15 @@ button[type="submit"] {
   border-radius: 0px;
   letter-spacing: 1px;
 }
-.item-tab {
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;  
-}
-.item-tab :active{
-  background: black !important;
-}
 
+.logo-container {
+  text-align: center;
+  padding: 15px;
+}
+.logo-container h4 {
+  font-weight: bold;
+}
+.user-photo-container{
+  text-align: center;
+}
 </style>

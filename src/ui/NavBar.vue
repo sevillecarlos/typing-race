@@ -9,7 +9,6 @@
           alt="Responsive image"
         ></b-img>
       </b-navbar-brand>
-
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav v-if="!token">
@@ -18,11 +17,11 @@
           >
         </b-navbar-nav>
         <b-navbar-nav v-else class="ml-auto">
-          <b-nav-item-dropdown right>
+          <b-nav-item-dropdown right class="dropdown-user">
             <template #button-content>
-              <em>{{ userName }}</em>
+              <em class="user-name">{{ userName }}</em>
             </template>
-            <b-dropdown-item href="#">{{ userEmail }}</b-dropdown-item>
+            <b-dropdown-text href="#">{{ userEmail }}</b-dropdown-text>
             <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -72,6 +71,15 @@ export default {
 </script>
 
 <style>
+.dropdown-user {
+  font-size: 20px;
+  letter-spacing: 1px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  transition: 0.5s background;
+  font-weight: bold;
+  background: rgba(91, 206, 14, 0.507);
+}
 .nav-bar {
   padding: 15px;
   margin: auto;
@@ -93,5 +101,9 @@ export default {
 }
 .sign-link a:hover {
   color: azure !important;
+}
+.user-name {
+  color: black;
+  font-style: normal;
 }
 </style>

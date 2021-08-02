@@ -33,6 +33,9 @@ export default {
 };
 </script>
 <style>
+#sidebar-1{
+  background-color: rgb(245, 245, 220) !important;
+}
 .level-ranking {
   margin-top: 50px;
   text-align: justify;
