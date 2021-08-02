@@ -1,27 +1,6 @@
 <template>
   <div>
-    <b-sidebar id="sidebar-1" title="Typing Race Rules" shadow>
-      <div class="px-3 py-2">
-        <p>
-          noob x 0 points
-        </p>
-        <p>
-          pro x 50 points
-        </p>
-        <p>
-          master x 60 points
-        </p>
-        <p>
-          leave your mom basement please x 70 points
-        </p>
-
-        <b-img
-          src="https://picsum.photos/500/500/?image=54"
-          fluid
-          thumbnail
-        ></b-img>
-      </div>
-    </b-sidebar>
+    <SideBar />
     <b-overlay :show="time === 0" rounded="sm">
       <template #overlay>
         <div class="d-flex align-items-center">
@@ -46,14 +25,31 @@
       </template>
       <div class="game-board">
         <div class="game-running">
-          <b-overlay :show="prepareTime !== 0 && showPrepare" rounded="sm">
+          <b-overlay
+            :show="prepareTime !== 0 && showPrepare"
+            rounded="lg"
+            class="overlay-prepare"
+            variant="dark"
+            opacity="0.90"
+          >
             <template #overlay>
-              <div class="d-flex align-items-center">
-                <div class="prepare-time">
-                  {{ prepareTime }}
+              <div class="overlay-content">
+                <div>
+                  <span class="prepare-time">
+                    {{ prepareTime }}
+                  </span>
+                </div>
+
+                <div class="prepare-msg-container">
+                  <p class="ready-msg" v-if="prepareTime === 3">
+                    Get ready to typing.
+                  </p>
+                  <p class="step-msg" v-else-if="prepareTime === 2">Ready?</p>
+                  <p class="go-msg" v-else>Go!</p>
                 </div>
               </div>
             </template>
+
             <div v-if="token" class="user-score-board">
               <span class="user-level-score">
                 {{ userName }} is a
@@ -62,17 +58,27 @@
               <span class="user-points">Points: {{ userPoints }}</span>
             </div>
             <br />
-            <button v-if="!startGame" @click="startCounter" class="restart-btn">
-              Start Game
-            </button>
             <Timer />
-            <button class="restart-btn" v-b-toggle.sidebar-1>Show Rules</button>
-            <br />
-            <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
-              correctsLetter
-            }}</span
-            ><span class="word">{{ word }}</span>
-            <br />
+            <div class="word-container">
+              <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
+                correctsLetter
+              }}</span
+              ><span class="word">{{ word }}</span>
+            </div>
+            <div class="btn-container">
+              <button
+                v-if="!startGame"
+                @click="startCounter"
+                class="restart-btn"
+              >
+                Start Game
+              </button>
+
+              <button class="show-rules-btn" v-b-toggle.sidebar-1>
+                Show Rules
+              </button>
+            </div>
+
             <button v-if="startGame" @click="pauseGameBoard">
               {{ pauseGame ? "Resume" : "Pause" }}
             </button>
@@ -87,11 +93,13 @@
 <script>
 import axios from "axios";
 import Timer from "./Timer.vue";
+import SideBar from "../ui/SideBar.vue";
 import { mapState } from "vuex";
 export default {
   name: "GameBoard",
   components: {
     Timer,
+    SideBar,
   },
   data() {
     return {
@@ -212,35 +220,42 @@ export default {
 
 <style>
 .game-board {
-  background-color: rgb(69, 82, 39);
-  width: 50%;
   margin: auto;
   padding: 50px;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  background: rgba(0, 0, 0, 0.199);
+}
+.prepare-time {
+  font-size: 80px;
+  color: azure;
+  font-weight: bold;
 }
 .word {
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 5px;
   color: rgb(0, 0, 0);
-  font-size: 70px;
+  font-size: 120px;
+  font-weight: bold;
+}
+.word-container {
+  margin: auto;
+  text-align: center;
 }
 .input-word {
   padding: 15px;
   visibility: hidden;
 }
 .correct-letter {
-  color: cornsilk;
+  color: azure;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 70px;
+  letter-spacing: 5px;
+  font-weight: bold;
+  font-size: 100px;
 }
 .timeout-msg {
   font-size: 80px;
   color: black;
-}
-.restart-btn {
-  font-size: 20px;
-  padding: 15px;
-  border-radius: 20px;
 }
 .user-points {
   color: black;
@@ -255,5 +270,35 @@ export default {
 .user-level-score {
   font-size: 20px;
   color: black;
+}
+.btn-container {
+  text-align: center;
+  padding: 10px;
+}
+.btn-container button {
+  border: none;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 15px;
+  border-top: 2px solid black !important;
+  border-bottom: 2px solid black !important;
+}
+.restart-btn {
+  background: rgba(128, 255, 0, 0.295);
+}
+.show-rules-btn {
+  background: rgba(0, 153, 255, 0.295);
+}
+.btn-container button:hover {
+  color: azure;
+}
+.prepare-msg-container {
+  font-size: 40px;
+  font-weight: bold;
+  color: azure;
+}
+.overlay-content {
+  text-align: center;
 }
 </style>
