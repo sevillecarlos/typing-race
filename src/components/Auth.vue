@@ -31,6 +31,8 @@
           </b-form-group>
 
           <b-button type="submit" variant="primary">Submit</b-button>
+          <br />
+          <span v-if="error" class="error-msg">{{ error }}</span>
         </b-form>
       </b-tab>
       <b-tab title="Tab 2">
@@ -97,6 +99,8 @@
           </b-form-group> -->
 
           <b-button type="submit" variant="primary">Submit</b-button>
+          <br />
+          <span class="error-msg">{{ error2 }}</span>
         </b-form></b-tab
       >
     </b-tabs>
@@ -104,6 +108,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -121,6 +126,12 @@ export default {
       userPhoto: null,
     };
   },
+  computed: {
+    ...mapState({
+      error: "error",
+      error2: "error2",
+    }),
+  },
   methods: {
     onSubmitSignIn(e) {
       e.preventDefault();
@@ -134,7 +145,6 @@ export default {
       const image = e.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(image);
-
       reader.onload = (e) => {
         this.userPhoto = e.target.result;
       };
@@ -153,5 +163,9 @@ export default {
   height: 100px !important;
   background-color: darkcyan !important;
   font-size: 50px !important;
+}
+.error-msg {
+  color: red;
+  font-size: 20px;
 }
 </style>

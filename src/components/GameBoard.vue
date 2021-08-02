@@ -140,13 +140,13 @@ export default {
       }
       this.clearState();
       this.getWord();
-      this.$store.commit("setTime", this.token ? this.time : 45);
+      this.$store.commit("setTime", this.originalTime);
     },
     pauseGameBoard() {
       this.$store.commit("setPauseGame", !this.pauseGame);
       this.showPrepare = true;
-
       if (!this.pauseGame) {
+        this.$store.commit("setPrepareTime", 3);
         this.prepareTimeCounter("setPrepareTimePause", true);
       }
     },
@@ -189,6 +189,7 @@ export default {
       pauseGame: "pauseGame",
       prepareTime: "prepareTime",
       prepareTimePause: "prepareTimePause",
+      originalTime: "originalTime",
     }),
     startGameKeyEvent() {
       return this.startGame;
@@ -202,7 +203,8 @@ export default {
   },
   mounted() {
     window.addEventListener("keypress", (ev) => {
-      this.startGameKeyEvent && this.checkWord(ev.key.toLowerCase());
+      if (this.startGameKeyEvent && !this.pauseGame)
+        this.prepareTime === 0 && this.checkWord(ev.key.toLowerCase());
     });
   },
 };

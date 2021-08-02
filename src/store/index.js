@@ -8,7 +8,8 @@ import { jwtDecoded } from "../helper/jwtDecoded";
 export default new Vuex.Store({
   state: {
     time: 45,
-    prepareTime: 3,
+    originalTime: 45,
+    prepareTime: 0,
     startGame: false,
     token: "",
     userPoints: 0,
@@ -18,10 +19,15 @@ export default new Vuex.Store({
     userLevel: "",
     pauseGame: false,
     prepareTimePause: false,
+    error: "",
+    error2: "",
   },
   mutations: {
     setTime(state, payload) {
       state.time = payload;
+    },
+    setOriginalTime(state, payload) {
+      state.originalTime = payload;
     },
     setPrepareTime(state, payload) {
       state.prepareTime = payload;
@@ -51,19 +57,35 @@ export default new Vuex.Store({
     setPrepareTimePause(state, payload) {
       state.prepareTimePause = payload;
     },
+    setError(state, payload) {
+      state.error = payload;
+    },
+    setError2(state, payload) {
+      state.error2 = payload;
+    },
   },
   actions: {
     async signIn({ commit }, payload) {
       const res = await axios.post(`http://localhost:5000/signin`, payload);
-      const { jwtToken } = await res.data;
-      commit("setToken", jwtToken);
-      localStorage.setItem("@uth", jwtToken);
+      const data = await res.data;
+      if (data?.error) {
+        commit("setError", data.error);
+      } else {
+        const { jwtToken } = data;
+        commit("setToken", jwtToken);
+        localStorage.setItem("@uth", jwtToken);
+      }
     },
     async signUp({ commit }, payload) {
       const res = await axios.post(`http://localhost:5000/signup`, payload);
-      const { jwtToken } = await res.data;
-      commit("setToken", jwtToken);
-      localStorage.setItem("@uth", jwtToken);
+      const data = await res.data;
+      if (data?.error) {
+        commit("setError2", data.error);
+      } else {
+        const { jwtToken } = data;
+        commit("setToken", jwtToken);
+        localStorage.setItem("@uth", jwtToken);
+      }
     },
     getToken({ commit }) {
       const token = localStorage.getItem("@uth");
@@ -94,6 +116,7 @@ export default new Vuex.Store({
       commit("setUserPoints", points);
       commit("setUserLevel", level);
       commit("setTime", time);
+      commit("setOriginalTime", time);
     },
     async addUserGameData({ commit }, gameData) {
       commit("setUserLevel", "noob");

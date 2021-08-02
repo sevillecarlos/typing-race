@@ -25,7 +25,6 @@ export default {
       }
     },
     prepareTimePause() {
-      console.log(this.prepareTimePause);
       if (this.prepareTimePause) {
         this.timer();
         this.$store.commit("setPrepareTimePause", false);
