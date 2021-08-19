@@ -39,12 +39,14 @@
                 >You complete {{ completeWordCounter }} words</span
               >
               <br />.
-              <div v-if="!token">
-                <span
-                  >Not sing in? Sign In so you can up level and become a typing
-                  race master</span
+              <div v-if="!token" class="not-sign-container">
+                <p class="not-sign-in-msg">
+                  Not Sing In? Sign In so you can up levels and become a typing
+                  race master
+                </p>
+                <a class="sign-in-link-overlay" href="/authentication"
+                  >Sing In</a
                 >
-                <a href="/authentication">Sing In</a>
               </div>
             </div>
           </div>
@@ -76,8 +78,12 @@
                 Start Game
               </button>
 
-              <button class="show-rules-btn" v-b-toggle.sidebar-1>
-                Show Rules
+              <button
+                class="show-rules-btn"
+                @click="showRules = !showRules"
+                v-b-toggle.sidebar-1
+              >
+                {{ showRules ? "Hide" : "Show" }} Rules
               </button>
             </div>
             <div class="pause-btn-container">
@@ -111,17 +117,19 @@ export default {
   data() {
     return {
       word: "",
+      nextWord: "",
+      verifyWord: "",
       correctsLetter: "",
       counterLetter: 0,
       wordTypingCounter: 0,
-      tempWord: "",
       completeWordCounter: 0,
       showPrepare: false,
+      showRules: false,
     };
   },
-  created() {
-    this.getWord();
-
+  async created() {
+    this.word = await this.getWord();
+    this.verifyWord = this.word;
     this.token && this.$store.dispatch("getUserGameData", this.userEmail);
   },
   methods: {
@@ -130,23 +138,27 @@ export default {
         "https://random-word-api.herokuapp.com/word?number=1"
       );
       const [data] = await res.data;
-      this.word = data;
-      this.tempWord = data;
+      return data;
     },
+
     checkWord(letter) {
-      if (this.tempWord[this.counterLetter] === letter) {
+      if (this.verifyWord[this.counterLetter] === letter) {
         this.counterLetter++;
         this.word = this.word.replace(letter, "");
-        this.correctsLetter = this.tempWord.slice(0, this.counterLetter);
+        this.correctsLetter = this.verifyWord.slice(0, this.counterLetter);
         if (this.word.length === 0) {
           this.completeWordCounter++;
-          this.getWord();
+          this.word = this.nextWord;
+          this.verifyWord = this.word;
           this.counterLetter = 0;
           this.correctsLetter = "";
         }
       }
     },
-    restartGame() {
+    async getNextWord() {
+      this.nextWord = await this.getWord();
+    },
+    async restartGame() {
       if (this.token) {
         this.$store.dispatch("addUserGameData", {
           email: this.userEmail,
@@ -154,7 +166,8 @@ export default {
         });
       }
       this.clearState();
-      this.getWord();
+      this.word = this.nextWord;
+      this.verifyWord = this.word;
       this.$store.commit("setTime", this.originalTime);
     },
     pauseGameBoard() {
@@ -212,6 +225,9 @@ export default {
   },
   watch: {
     startGameKeyEvent() {},
+    verifyWord() {
+      this.getNextWord();
+    },
   },
   userLevel() {
     console.log(this.userLevel);
@@ -264,7 +280,7 @@ export default {
   font-size: 100px;
 }
 .timeout-msg {
-  font-size: 80px;
+  font-size: 65px;
   color: beige;
   font-weight: bold;
 }
@@ -358,6 +374,25 @@ export default {
   border-bottom: 2px solid black !important;
 }
 .pause-btn:hover {
+  color: beige !important;
+}
+.not-sign-container * {
+  color: beige;
+  font-weight: bold;
+  padding: 15px;
+}
+.sign-in-link-overlay {
+  text-decoration: none;
+  color: black !important;
+  font-size: 20px;
+  letter-spacing: 1px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  font-weight: bold;
+  background: rgba(206, 14, 14, 0.507);
+  padding: 5px;
+}
+.sign-in-link-overlay:hover {
   color: beige !important;
 }
 </style>

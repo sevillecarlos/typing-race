@@ -1,5 +1,5 @@
 <template>
-  <b-sidebar id="sidebar-1" title="Typing Race Rules" shadow>
+  <b-sidebar no-header id="sidebar-1" title="Typing Race Rules" shadow>
     <div class="px-3 py-2">
       <div class="instructions">
         <h5><strong>Instructions</strong></h5>
@@ -34,7 +34,7 @@ export default {
 </script>
 <style>
 #sidebar-1{
-  background-color: rgb(245, 245, 220) !important;
+  background-color: rgba(245, 245, 220, 0.26) !important;
 }
 .level-ranking {
   margin-top: 50px;
@@ -58,7 +58,6 @@ export default {
   letter-spacing: 1px;
   border-left: 2px solid black;
   border-right: 2px solid black;
-  transition: 0.5s background;
   font-weight: bold;
   background: rgba(206, 14, 14, 0.507);
   padding: 10px;
