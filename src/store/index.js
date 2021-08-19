@@ -99,7 +99,7 @@ export default new Vuex.Store({
     },
     getUserData({ commit }, token) {
       const { name, email, userPhoto } = jwtDecoded(token);
-      console.log(jwtDecoded(token))
+      console.log(jwtDecoded(token));
       const firstName = name.split(" ").shift();
       commit("setUserEmail", email);
       commit("setUserName", firstName);
@@ -111,8 +111,6 @@ export default new Vuex.Store({
     },
 
     async getUserGameData({ commit }, email) {
-      console.log(email);
-
       const res = await axios.post(`http://localhost:5000/get-user-data-game`, {
         email,
       });
@@ -125,7 +123,6 @@ export default new Vuex.Store({
       commit("setOriginalTime", time);
     },
     async addUserGameData({ commit }, gameData) {
-      commit("setUserLevel", "noob");
       const res = await axios.post(
         `http://localhost:5000/add-user-game-data`,
         gameData
@@ -135,6 +132,19 @@ export default new Vuex.Store({
       const { points, level } = userData;
       commit("setUserPoints", points);
       commit("setUserLevel", level);
+    },
+    async restartGame({ commit }, email) {
+      console.log(email);
+      const res = await axios.put(`http://localhost:5000/restart-game`, {
+        email,
+      });
+      const {
+        user: { points, level, time },
+      } = await res.data;
+      commit("setUserPoints", points);
+      commit("setUserLevel", level);
+      commit("setTime", time);
+      commit("setOriginalTime", time);
     },
   },
   modules: {},
