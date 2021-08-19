@@ -66,13 +66,19 @@
             ></b-img>
           </div>
           <div class="user-photo-container">
-            <b-avatar variant="primary" class="avatar-user" :src="userPhoto">
+            <b-avatar
+              variant="primary"
+              class="avatar-user"
+              :src="userPhotoPrev"
+            >
             </b-avatar>
             <br />
             <b-form-file
               @change="uploadPhotoUser"
-              class="mt-3 uploader-photo"
+              class="uploader-photo"
               plain
+              accept="image/*"
+              no-drop
             ></b-form-file>
           </div>
 
@@ -152,9 +158,8 @@ export default {
         fullName: "",
         email: "",
         password: "",
-        // userPhoto: null,
       },
-      file: [],
+      userPhotoPrev: null,
       userPhoto: null,
       logo: logoImage,
     };
@@ -170,16 +175,22 @@ export default {
       e.preventDefault();
       this.$store.dispatch("signIn", this.formSignIn);
     },
+
     onSubmitSignUp(e) {
       e.preventDefault();
-      this.$store.dispatch("signUp", this.formSignUp);
+      const formData = new FormData();
+      formData.append("fullName", this.formSignUp.fullName);
+      formData.append("email", this.formSignUp.email);
+      formData.append("password", this.formSignUp.password);
+      formData.append("imagesArray", this.userPhoto);
+      this.$store.dispatch("signUp", formData);
     },
     uploadPhotoUser(e) {
-      const image = e.target.files[0];
+      this.userPhoto = e.target.files[0];
       const reader = new FileReader();
-      reader.readAsDataURL(image);
+      reader.readAsDataURL(this.userPhoto);
       reader.onload = (e) => {
-        this.userPhoto = e.target.result;
+        this.userPhotoPrev = e.target.result;
       };
     },
   },
@@ -208,9 +219,8 @@ export default {
   color: rgb(0, 0, 0) !important;
 }
 .avatar-user {
-  width: 70px !important;
-  height: 70px !important;
-  background-color: darkcyan !important;
+  width: 100px !important;
+  height: 100px !important;
   font-size: 50px !important;
 }
 .error-msg {
@@ -260,7 +270,10 @@ button[type="submit"] {
 .logo-container h4 {
   font-weight: bold;
 }
-.user-photo-container{
+.uploader-photo {
+  background-color: transparent !important;
+}
+.user-photo-container {
   text-align: center;
 }
 </style>
