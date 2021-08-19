@@ -15,6 +15,7 @@ export default new Vuex.Store({
     userPoints: 0,
     userName: "",
     userEmail: "",
+    userPhoto: "",
     points: "",
     userLevel: "",
     pauseGame: false,
@@ -47,6 +48,9 @@ export default new Vuex.Store({
     },
     setUserEmail(state, payload) {
       state.userEmail = payload;
+    },
+    setUserPhoto(state, payload) {
+      state.userPhoto = payload;
     },
     setUserLevel(state, payload) {
       state.userLevel = payload;
@@ -94,10 +98,12 @@ export default new Vuex.Store({
       }
     },
     getUserData({ commit }, token) {
-      const { name, email } = jwtDecoded(token);
+      const { name, email, userPhoto } = jwtDecoded(token);
+      console.log(jwtDecoded(token))
       const firstName = name.split(" ").shift();
       commit("setUserEmail", email);
       commit("setUserName", firstName);
+      commit("setUserPhoto", userPhoto);
     },
     signOut({ commit }) {
       localStorage.removeItem("@uth");

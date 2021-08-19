@@ -182,7 +182,7 @@ export default {
       formData.append("fullName", this.formSignUp.fullName);
       formData.append("email", this.formSignUp.email);
       formData.append("password", this.formSignUp.password);
-      formData.append("imagesArray", this.userPhoto);
+      formData.append("userPhoto", this.userPhoto);
       this.$store.dispatch("signUp", formData);
     },
     uploadPhotoUser(e) {

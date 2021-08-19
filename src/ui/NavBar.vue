@@ -19,10 +19,17 @@
         <b-navbar-nav v-else class="ml-auto">
           <b-nav-item-dropdown right class="dropdown-user">
             <template #button-content>
-              <em class="user-name">{{ userName }}</em>
+              <b-avatar
+                variant="info"
+                class="user-photo"
+                :src="userPhoto"
+              ></b-avatar>
             </template>
+            <b-dropdown-text href="#">Hi {{ userName }}</b-dropdown-text>
             <b-dropdown-text href="#">{{ userEmail }}</b-dropdown-text>
-            <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
+            <b-dropdown-item class="sign-out-item" @click="signOut"
+              >Sign Out</b-dropdown-item
+            >
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -38,8 +45,6 @@ export default {
     return {
       brandLogo: logo,
       auth: false,
-      firstName: "",
-      email: "",
     };
   },
   created() {
@@ -59,6 +64,7 @@ export default {
       token: "token",
       userName: "userName",
       userEmail: "userEmail",
+      userPhoto: "userPhoto",
     }),
   },
   mounted() {},
@@ -77,8 +83,15 @@ export default {
   border-left: 2px solid black;
   border-right: 2px solid black;
   transition: 0.5s background;
+  text-align: center;
+
   font-weight: bold;
-  background: rgba(91, 206, 14, 0.507);
+  background: rgba(27, 31, 25, 0.349);
+  transition: 0.5s background;
+}
+
+.dropdown-user:hover {
+  background: rgba(94, 102, 89, 0.349);
 }
 .nav-bar {
   padding: 15px;
@@ -105,5 +118,14 @@ export default {
 .user-name {
   color: black;
   font-style: normal;
+}
+.user-photo {
+  width: 70px !important;
+  height: 70px !important;
+}
+.sign-out-item {
+  background: rgba(109, 99, 99, 0.322);
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 }
 </style>

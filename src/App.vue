@@ -3,7 +3,9 @@
     <NavBar />
     <router-view />
     <div class="footer">
-      <span >code by Carlos🍒</span>
+      <a href="https://github.com/sevillecarlos" target="blank"
+        >code by Carlos🍒</a
+      >
     </div>
   </div>
 </template>
@@ -32,15 +34,17 @@ export default {
   font-size: 20px;
   padding: 15px;
   font-weight: bold;
-  cursor: pointer;
 }
-.footer span:hover{
-  color: aliceblue;
-}
-.footer span{
+
+.footer a {
   background-color: rgba(126, 32, 32, 0.322);
   padding: 15px;
-    border-left: 3px solid black;
+  border-left: 3px solid black;
   border-right: 3px solid black;
+  text-decoration: none;
+  color: black;
+}
+.footer a:hover {
+  color: aliceblue;
 }
 </style>
