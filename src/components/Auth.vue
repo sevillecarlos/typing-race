@@ -5,6 +5,7 @@
       pills
       nav-class="item-tab"
       nav-wrapper-class="control-nav"
+      active-nav-item-class="active-tab"
     >
       <b-tab
         title-link-class="title-tab"
@@ -79,16 +80,17 @@
               plain
               accept="image/*"
               no-drop
+              required
             ></b-form-file>
           </div>
 
           <b-form-group
-            id="input-group-1"
+            id="input-group-3"
             label="Fullname:"
-            label-for="input-1"
+            label-for="input-3"
           >
             <b-form-input
-              id="input-1"
+              id="input-3"
               v-model="formSignUp.fullName"
               type="text"
               placeholder="Enter Full Name"
@@ -96,12 +98,12 @@
             ></b-form-input>
           </b-form-group>
           <b-form-group
-            id="input-group-1"
+            id="input-group-4"
             label="Email address:"
-            label-for="input-1"
+            label-for="input-4"
           >
             <b-form-input
-              id="input-1"
+              id="input-4"
               v-model="formSignUp.email"
               type="email"
               placeholder="Enter email"
@@ -110,29 +112,29 @@
           </b-form-group>
 
           <b-form-group
-            id="input-group-2"
+            id="input-group-5"
             label="Your password:"
-            label-for="input-2"
+            label-for="input-5"
           >
             <b-form-input
-              id="input-2"
+              id="input-5"
               v-model="formSignUp.password"
               placeholder="Enter password"
               required
             ></b-form-input>
           </b-form-group>
-          <!-- <b-form-group
-            id="input-group-2"
+          <b-form-group
+            id="input-group-6"
             label="Your Confirm password:"
-            label-for="input-2"
+            label-for="input-6"
           >
             <b-form-input
-              id="input-2"
+              id="input-6"
               v-model="formSignUp.confirmPassword"
-              placeholder="Enter name"
+              placeholder="Enter confirm password"
               required
             ></b-form-input>
-          </b-form-group> -->
+          </b-form-group>
 
           <b-button type="submit" variant="primary">Register</b-button>
           <br />
@@ -158,6 +160,7 @@ export default {
         fullName: "",
         email: "",
         password: "",
+        confirmPassword: "",
       },
       userPhotoPrev: null,
       userPhoto: null,
@@ -210,6 +213,7 @@ export default {
 .title-tab {
   font-weight: bold;
   color: azure !important;
+  border: black !important;
 }
 .active-class {
   font-family: "Quicksand", sans-serif;
@@ -243,13 +247,6 @@ export default {
   border-left: 3px solid black;
   border-right: 3px solid black;
 }
-.active-class {
-  font-family: "Quicksand", sans-serif;
-  box-shadow: 0 0 7px #fff, 0 0 10px rgb(157, 255, 0);
-  border-radius: 16px !important;
-  background-color: rgb(0, 255, 21) !important;
-  color: rgb(0, 0, 0) !important;
-}
 button[type="submit"] {
   margin-top: 20px;
   width: 100%;
@@ -275,5 +272,14 @@ button[type="submit"] {
 }
 .user-photo-container {
   text-align: center;
+}
+.active-tab {
+  background: rgba(0, 0, 0, 0.459) !important;
+  border-radius: 0px !important;
+  border-right: 2px solid black !important;
+  border-left: 2px solid black !important;
+}
+.item-tab {
+  color: blue !important;
 }
 </style>

@@ -44,7 +44,6 @@
                   @click="restartGame"
                   >Restart</b-button
                 >
-
                 <b-button v-b-toggle="'collapse-2'" class="cancel button"
                   >Cancel</b-button
                 >
