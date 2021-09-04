@@ -1,137 +1,169 @@
 <template>
   <div>
-    <b-sidebar id="sidebar-1" title="Typing Race Rules" shadow>
-      <div class="px-3 py-2">
-        <p>
-          noob x 0 points
-        </p>
-        <p>
-          pro x 50 points
-        </p>
-        <p>
-          master x 60 points
-        </p>
-        <p>
-          leave your mom basement please x 70 points
-        </p>
+    <SideBar />
 
-        <b-img
-          src="https://picsum.photos/500/500/?image=54"
-          fluid
-          thumbnail
-        ></b-img>
-      </div>
-    </b-sidebar>
-    <b-overlay :show="time === 0" rounded="sm">
-      <template #overlay>
-        <div class="d-flex align-items-center">
-          <div class="game-stop">
-            <span class="timeout-msg">Your time finish</span>
-            <br />
-            <button @click="restartGame" class="restart-btn">
-              Restart Game
-            </button>
-            <br />
-            <span>You complete {{ completeWordCounter }} words</span>
-            <br />.
-            <div v-if="!token">
-              <span
-                >Not sing in? Sign In so you can up level and become a typing
-                race master</span
+    <div class="game-board">
+      <NavBar />
+      <b-overlay
+        :show="time === 0"
+        rounded="sm"
+        variant="warning"
+        opacity="0.90"
+      >
+        <template #overlay>
+          <div class="d-flex align-items-center">
+            <div class="game-stop">
+              <span class="timeout-msg">Your time finish</span>
+              <br />
+              <button @click="restartGame" class="restart-btn">
+                Restart Game
+              </button>
+              <br />
+              <span class="complete-word-msg"
+                >You complete {{ completeWordCounter }} words</span
               >
-              <a href="/authentication">Sing In</a>
+              <br />
+              <div v-if="!token" class="not-sign-container">
+                <p class="not-sign-in-msg">
+                  Not Sign In? Sign In, so you can up levels and become a typing
+                  race master
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
-      <div class="game-board">
-        <div class="game-running">
-          <b-overlay :show="prepareTime !== 0 && showPrepare" rounded="sm">
-            <template #overlay>
-              <div class="d-flex align-items-center">
-                <div class="prepare-time">
+        </template>
+        <b-overlay
+          :show="prepareTime !== 0 && showPrepare"
+          rounded="lg"
+          class="overlay-prepare"
+          variant="warning"
+          opacity="0.9"
+        >
+          <template #overlay>
+            <div class="overlay-content">
+              <div>
+                <span class="prepare-time">
                   {{ prepareTime }}
-                </div>
+                </span>
               </div>
-            </template>
+
+              <div class="prepare-msg-container">
+                <p class="ready-msg" v-if="prepareTime === 3">
+                  Get ready to type.
+                </p>
+                <p class="step-msg" v-else-if="prepareTime === 2">Ready?</p>
+                <p class="go-msg" v-else>Go!</p>
+              </div>
+            </div>
+          </template>
+          <div class="game-board-container">
             <div v-if="token" class="user-score-board">
               <span class="user-level-score">
-                {{ userName }} is a
+                <span>Level:</span>
                 <span class="level-label">{{ userLevel }}</span>
               </span>
-              <span class="user-points">Points: {{ userPoints }}</span>
+              <div class="points-container">
+                <span class="user-points"
+                  >Points: <span class="points">{{ userPoints }}</span>
+                </span>
+              </div>
             </div>
             <br />
-            <button v-if="!startGame" @click="startCounter" class="restart-btn">
-              Start Game
-            </button>
-            <Timer />
-            <button class="restart-btn" v-b-toggle.sidebar-1>Show Rules</button>
-            <br />
-            <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
-              correctsLetter
-            }}</span
-            ><span class="word">{{ word }}</span>
-            <br />
-            <button v-if="startGame" @click="pauseGameBoard">
-              {{ pauseGame ? "Resume" : "Pause" }}
-            </button>
-          </b-overlay>
-        </div>
-        <br />
-      </div>
-    </b-overlay>
+            <div class="game-container">
+              <Timer />
+              <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
+                correctsLetter
+              }}</span
+              ><span class="word">{{ word }}</span>
+            </div>
+            <div v-if="!startGame" class="btn-container">
+              <button :disabled="!word" @click="startCounter" class="start-btn">
+                Start Game
+              </button>
+
+              <button
+                class="show-rules-btn"
+                @click="showRules = !showRules"
+                v-b-toggle.sidebar-1
+              >
+                {{ showRules ? "Hide" : "Show" }} Rules
+              </button>
+            </div>
+            <div class="pause-btn-container">
+              <button
+                class="pause-btn"
+                v-if="startGame"
+                @click="pauseGameBoard"
+              >
+                {{ pauseGame ? "Resume" : "Pause" }}
+              </button>
+            </div>
+          </div>
+        </b-overlay>
+      </b-overlay>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Timer from "./Timer.vue";
+import SideBar from "../ui/SideBar.vue";
+import NavBar from "../ui/NavBar.vue";
 import { mapState } from "vuex";
 export default {
   name: "GameBoard",
   components: {
     Timer,
+    SideBar,
+    NavBar,
   },
   data() {
     return {
       word: "",
+      nextWord: "",
+      verifyWord: "",
       correctsLetter: "",
       counterLetter: 0,
       wordTypingCounter: 0,
-      tempWord: "",
       completeWordCounter: 0,
       showPrepare: false,
+      showRules: false,
     };
   },
-  created() {
-    this.getWord();
-
+  async created() {
+    this.word = await this.getWord();
+    this.verifyWord = this.word;
     this.token && this.$store.dispatch("getUserGameData", this.userEmail);
   },
   methods: {
     async getWord() {
       const res = await axios.get(
-        "https://random-word-api.herokuapp.com/word?number=1"
+        "https://random-word-api.herokuapp.com/word?number=5"
       );
-      const [data] = await res.data;
-      this.word = data;
-      this.tempWord = data;
+      const [data] = await res.data.filter((v) => v.length < 14);
+      console.log(data);
+      return data;
     },
+
     checkWord(letter) {
-      if (this.tempWord[this.counterLetter] === letter) {
+      if (this.verifyWord[this.counterLetter] === letter) {
         this.counterLetter++;
         this.word = this.word.replace(letter, "");
-        this.correctsLetter = this.tempWord.slice(0, this.counterLetter);
+        this.correctsLetter = this.verifyWord.slice(0, this.counterLetter);
         if (this.word.length === 0) {
           this.completeWordCounter++;
-          this.getWord();
+          this.word = this.nextWord;
+          this.verifyWord = this.word;
           this.counterLetter = 0;
           this.correctsLetter = "";
         }
       }
     },
-    restartGame() {
+    async getNextWord() {
+      this.nextWord = await this.getWord();
+    },
+    async restartGame() {
       if (this.token) {
         this.$store.dispatch("addUserGameData", {
           email: this.userEmail,
@@ -139,7 +171,8 @@ export default {
         });
       }
       this.clearState();
-      this.getWord();
+      this.word = this.nextWord;
+      this.verifyWord = this.word;
       this.$store.commit("setTime", this.originalTime);
     },
     pauseGameBoard() {
@@ -160,7 +193,6 @@ export default {
       const countPrepareTime = setInterval(() => {
         let prepareTime = this.prepareTime;
         prepareTime--;
-        console.log(prepareTime);
         this.$store.commit("setPrepareTime", prepareTime);
         if (this.prepareTime === 0) {
           clearInterval(countPrepareTime);
@@ -169,11 +201,11 @@ export default {
       }, 1000);
     },
     clearState() {
-      (this.word = ""),
-        (this.correctsLetter = ""),
-        (this.counterLetter = 0),
-        (this.wordTypingCounter = 0),
-        (this.tempWord = "");
+      this.word = "";
+      this.correctsLetter = "";
+      this.counterLetter = 0;
+      this.wordTypingCounter = 0;
+      this.tempWord = "";
       this.completeWordCounter = 0;
     },
   },
@@ -197,9 +229,9 @@ export default {
   },
   watch: {
     startGameKeyEvent() {},
-  },
-  userLevel() {
-    console.log(this.userLevel);
+    verifyWord() {
+      this.getNextWord();
+    },
   },
   mounted() {
     window.addEventListener("keypress", (ev) => {
@@ -212,48 +244,272 @@ export default {
 
 <style>
 .game-board {
-  background-color: rgb(69, 82, 39);
-  width: 50%;
-  margin: auto;
-  padding: 50px;
+  margin-top: 10%;
+  padding: 25px;
+  background: #faa507fa !important;
+  border-radius: 10px;
 }
+
+.game-container {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 100px;
+}
+
 .word {
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 5px;
   color: rgb(0, 0, 0);
-  font-size: 70px;
+  font-weight: bold;
+}
+
+.correct-letter {
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: bold;
+  font-size: 100px;
 }
 .input-word {
   padding: 15px;
   visibility: hidden;
 }
-.correct-letter {
-  color: cornsilk;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 70px;
-}
+
 .timeout-msg {
-  font-size: 80px;
-  color: black;
-}
-.restart-btn {
-  font-size: 20px;
-  padding: 15px;
-  border-radius: 20px;
+  font-size: 65px;
+  font-weight: bold;
 }
 .user-points {
   color: black;
-  font-size: 30px;
+  font-size: 20px;
 }
 .level-label {
-  background-color: darkblue;
-  color: aliceblue;
-  border-radius: 20px;
-  padding: 20px;
+  font-weight: bold;
+  font-size: 25px;
+  padding: 3px;
+  text-align: justify !important;
+  border-radius: 15px;
 }
 .user-level-score {
   font-size: 20px;
+  float: left;
   color: black;
+}
+.btn-container {
+  text-align: center;
+  padding: 10px;
+}
+.game-stop {
+  text-align: center;
+  padding: 15px;
+  color: black !important;
+}
+
+.points-container {
+  float: right;
+}
+.points {
+  font-weight: bold;
+  font-size: 30px;
+  padding: 1px;
+  border-radius: 15px;
+}
+.start-btn {
+  background: rgb(115, 255, 0) !important;
+  margin-right: 10px;
+}
+.show-rules-btn {
+  background: rgb(0, 153, 255);
+}
+
+.prepare-msg-container {
+  font-size: 40px;
+  color: black;
+  font-weight: bold;
+}
+.prepare-time {
+  font-size: 80px;
+  color: black;
+  font-weight: bold;
+}
+
+.complete-word-msg {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+.overlay-content {
+  text-align: center;
+}
+.pause-btn-container {
+  text-align: center;
+}
+.restart-btn {
+  background: rgb(115, 255, 0) !important;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+}
+.pause-btn {
+  font-size: 25px !important;
+  background: rgb(255, 0, 51) !important;
+}
+
+.not-sign-container * {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 10px;
+}
+.sign-in-link-overlay {
+  text-decoration: none;
+  color: black !important;
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  background: rgba(206, 14, 14, 0.507);
+  padding: 5px;
+}
+.sign-in-link-overlay:hover {
+  color: beige !important;
+}
+/***************************************************************************/
+/* Big tablets to 1200px*/
+@media only screen and (max-width: 1200px) {
+  .word {
+    font-size: 70px;
+  }
+}
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .word {
+    font-size: 50px;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .word {
+    font-size: 50px;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .game-board {
+    margin-top: 3%;
+    padding: 15px;
+  }
+
+  .game-container {
+    margin-top: 5px;
+  }
+
+  .correct-letter {
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-size: 100px;
+  }
+  .input-word {
+    padding: 15px;
+    visibility: hidden;
+  }
+
+  .timeout-msg {
+    font-size: 65px;
+    font-weight: bold;
+  }
+  .user-points {
+    color: black;
+    font-size: 20px;
+  }
+  .level-label {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 3px;
+    text-align: justify !important;
+    border-radius: 15px;
+  }
+  .user-level-score {
+    font-size: 20px;
+    float: left;
+    color: black;
+  }
+  .btn-container {
+    text-align: center;
+    padding: 10px;
+  }
+  .game-stop {
+    text-align: center;
+    padding: 15px;
+    color: black !important;
+  }
+
+  .points-container {
+    float: right;
+  }
+  .points {
+    font-weight: bold;
+    font-size: 30px;
+    padding: 1px;
+    border-radius: 15px;
+  }
+  .start-btn {
+    background: rgb(115, 255, 0) !important;
+    margin-right: 10px;
+  }
+  .show-rules-btn {
+    background: rgb(0, 153, 255);
+  }
+
+  .prepare-msg-container {
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+  }
+  .prepare-time {
+    font-size: 80px;
+    color: black;
+    font-weight: bold;
+  }
+
+  .complete-word-msg {
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .overlay-content {
+    text-align: center;
+  }
+  .pause-btn-container {
+    text-align: center;
+  }
+  .restart-btn {
+    background: rgb(115, 255, 0) !important;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+  }
+  .pause-btn {
+    font-size: 25px !important;
+    background: rgb(255, 0, 51) !important;
+  }
+
+  .not-sign-container * {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 10px;
+  }
+  .sign-in-link-overlay {
+    text-decoration: none;
+    color: black !important;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    background: rgba(206, 14, 14, 0.507);
+    padding: 5px;
+  }
 }
 </style>

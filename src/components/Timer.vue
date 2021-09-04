@@ -57,8 +57,12 @@ export default {
 </script>
 
 <style>
+.timer{
+  text-align: center;
+}
 .time {
   font-size: 40px;
   color: black;
+  font-weight: bold;
 }
 </style>

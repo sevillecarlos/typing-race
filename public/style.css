@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 98.5vh;
+}
+
+body {
+  background-color: #09165D !important;
+  font-family: "Roboto Mono", monospace !important;
+}
