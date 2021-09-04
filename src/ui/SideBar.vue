@@ -61,7 +61,7 @@ export default {
 }
 .level-ranking,
 .instructions {
-  margin-top: 50px;
+  margin-top: 5%;
   text-align: center;
   font-size: 20px;
 }

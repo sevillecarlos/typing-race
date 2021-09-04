@@ -16,7 +16,7 @@
               <span class="timeout-msg">Your time finish</span>
               <br />
               <button @click="restartGame" class="restart-btn">
-                Restart Game
+                Restart
               </button>
               <br />
               <span class="complete-word-msg"
@@ -244,7 +244,137 @@ export default {
 
 <style>
 .game-board {
-  margin-top: 10%;
+  margin-top: 5%;
+  padding: 1%;
+  background: #faa507fa !important;
+  border-radius: 10px;
+}
+
+.game-container {
+  margin-top: 2px;
+  text-align: center;
+  font-size: 100px;
+}
+
+.word {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+.correct-letter {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 100px;
+}
+.input-word {
+  padding: 15px;
+  visibility: hidden;
+}
+.timeout-msg {
+  font-size: 65px;
+  font-weight: bold;
+}
+.user-points {
+  color: black;
+  font-size: 20px;
+}
+.level-label {
+  font-weight: bold;
+  font-size: 25px;
+  padding: 3px;
+  text-align: justify !important;
+  border-radius: 15px;
+}
+.user-level-score {
+  font-size: 20px;
+  float: left;
+  color: black;
+}
+.btn-container {
+  text-align: center;
+  padding: 10px;
+}
+.game-stop {
+  text-align: center;
+  padding: 15px;
+  color: black !important;
+}
+
+.points-container {
+  float: right;
+}
+.points {
+  font-weight: bold;
+  font-size: 30px;
+  padding: 1px;
+  border-radius: 15px;
+}
+.start-btn {
+  background: rgb(115, 255, 0) !important;
+  margin-right: 10px;
+}
+.show-rules-btn {
+  background: rgb(0, 153, 255);
+}
+
+.prepare-msg-container {
+  font-size: 40px;
+  color: black;
+  font-weight: bold;
+}
+.prepare-time {
+  font-size: 80px;
+  color: black;
+  font-weight: bold;
+}
+
+.complete-word-msg {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+.overlay-content {
+  text-align: center;
+}
+.pause-btn-container {
+  text-align: center;
+}
+.restart-btn {
+  background: rgb(115, 255, 0) !important;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+}
+.pause-btn {
+  font-size: 25px !important;
+  background: rgb(255, 0, 51) !important;
+}
+
+.not-sign-container * {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 10px;
+}
+.sign-in-link-overlay {
+  text-decoration: none;
+  color: black !important;
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  background: rgba(206, 14, 14, 0.507);
+  padding: 5px;
+}
+.sign-in-link-overlay:hover {
+  color: beige !important;
+}
+/***************************************************************************/
+/* Big tablets to 1200px*/
+@media only screen and (max-width: 1200px) {
+  .game-board {
+  margin-top: 1%;
   padding: 25px;
   background: #faa507fa !important;
   border-radius: 10px;
@@ -258,7 +388,6 @@ export default {
 
 .word {
   text-transform: uppercase;
-  letter-spacing: 5px;
   color: rgb(0, 0, 0);
   font-weight: bold;
 }
@@ -372,12 +501,6 @@ export default {
 .sign-in-link-overlay:hover {
   color: beige !important;
 }
-/***************************************************************************/
-/* Big tablets to 1200px*/
-@media only screen and (max-width: 1200px) {
-  .word {
-    font-size: 70px;
-  }
 }
 
 /* Small tablets to big tablets: from 768 to 1032*/
@@ -397,20 +520,21 @@ export default {
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
   .game-board {
-    margin-top: 3%;
+    margin-top: 1%;
     padding: 15px;
   }
-
+  .restart-btn {
+  font-size: 15px !important;
+}
+  .word {
+    font-size: 40px;
+  }
   .game-container {
     margin-top: 5px;
   }
 
   .correct-letter {
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-weight: bold;
-    font-size: 100px;
+    font-size: 40px;
   }
   .input-word {
     padding: 15px;
@@ -418,12 +542,12 @@ export default {
   }
 
   .timeout-msg {
-    font-size: 65px;
+    font-size: 10px;
     font-weight: bold;
   }
   .user-points {
     color: black;
-    font-size: 20px;
+    font-size: 15px;
   }
   .level-label {
     font-weight: bold;
@@ -486,12 +610,7 @@ export default {
   .pause-btn-container {
     text-align: center;
   }
-  .restart-btn {
-    background: rgb(115, 255, 0) !important;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-  }
+
   .pause-btn {
     font-size: 25px !important;
     background: rgb(255, 0, 51) !important;
@@ -500,7 +619,8 @@ export default {
   .not-sign-container * {
     color: rgb(0, 0, 0);
     font-weight: bold;
-    padding: 10px;
+    padding: 1px;
+    font-size:15px
   }
   .sign-in-link-overlay {
     text-decoration: none;
