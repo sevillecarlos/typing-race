@@ -11,29 +11,46 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      time: 5,
+      timerCounter: null,
+      prepareTimer: null,
     };
   },
   watch: {
     startGame() {
       this.startGame && this.timer();
     },
+    pauseGame() {
+      if (this.pauseGame) {
+        clearInterval(this.timerCounter);
+      }
+    },
+    prepareTimePause() {
+      if (this.prepareTimePause) {
+        this.timer();
+        this.$store.commit("setPrepareTimePause", false);
+      }
+    },
   },
   computed: {
     ...mapState({
       startGame: "startGame",
+      time: "time",
+      pauseGame: "pauseGame",
+      prepareTimePause: "prepareTimePause",
     }),
   },
   methods: {
     timer() {
-      const timerCounter = setInterval(() => {
-        this.time--;
-        this.$store.commit("setTime", this.time);
-        if (this.time === 0) {
-          clearInterval(timerCounter);
-          this.$store.commit("setStartGame", false);
-        }
-      }, 1000);
+      this.timerCounter = setInterval(this.timeCounter, 1000);
+    },
+    timeCounter() {
+      let timeTemp = this.time;
+      timeTemp--;
+      this.$store.commit("setTime", timeTemp);
+      if (this.time === 0) {
+        clearInterval(this.timerCounter);
+        this.$store.commit("setStartGame", false);
+      }
     },
   },
 };

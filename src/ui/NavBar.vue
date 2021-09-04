@@ -18,9 +18,9 @@
         <b-navbar-nav v-else class="ml-auto">
           <b-nav-item-dropdown right>
             <template #button-content>
-              <em>{{ names }}</em>
+              <em>{{ userName }}</em>
             </template>
-            <b-dropdown-item href="#">{{ email }}</b-dropdown-item>
+            <b-dropdown-item href="#">{{ userEmail }}</b-dropdown-item>
             <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -31,33 +31,34 @@
 
 <script>
 import logo from "../assets/logo-typing-race.png";
-import { jwtDecoded } from "../helper/jwtDecoded";
 import { mapState } from "vuex";
 export default {
   data() {
     return {
       brandLogo: logo,
       auth: false,
-      userName: "",
-      userEmail: "",
+      firstName: "",
+      email: "",
     };
   },
   created() {
     this.$store.dispatch("getToken");
+    if (this.token) {
+      this.$store.dispatch("getUserData", this.token);
+    }
   },
-  watch: {},
+  watch: {
+    token(){
+       this.$store.dispatch("getUserData", this.token);
+       this.$router.push(`/`);
+    }
+  },
   computed: {
     ...mapState({
       token: "token",
+      userName: "userName",
+      userEmail: "userEmail",
     }),
-    names() {
-      const { name } = jwtDecoded(this.token);
-      return name.split(" ").shift();
-    },
-    email() {
-      const { email } = jwtDecoded(this.token);
-      return email;
-    },
   },
   mounted() {},
   methods: {

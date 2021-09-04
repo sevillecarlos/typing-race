@@ -31,23 +31,20 @@
           </b-form-group>
 
           <b-button type="submit" variant="primary">Submit</b-button>
+          <br />
+          <span v-if="error" class="error-msg">{{ error }}</span>
         </b-form>
       </b-tab>
       <b-tab title="Tab 2">
         <b-form @submit="onSubmitSignUp">
-          <b-avatar
-            variant="primary"
-            class="avatar-user"
-            :src="formSignUp.userPhoto"
-          >
+          <b-avatar variant="primary" class="avatar-user" :src="userPhoto">
           </b-avatar>
           <br />
-          <!-- <b-form-file
+          <b-form-file
             @change="uploadPhotoUser"
-            v-model="file"
             class="mt-3 uploader-photo"
             plain
-          ></b-form-file> -->
+          ></b-form-file>
 
           <b-form-group
             id="input-group-1"
@@ -102,6 +99,8 @@
           </b-form-group> -->
 
           <b-button type="submit" variant="primary">Submit</b-button>
+          <br />
+          <span class="error-msg">{{ error2 }}</span>
         </b-form></b-tab
       >
     </b-tabs>
@@ -109,6 +108,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -120,10 +120,17 @@ export default {
         fullName: "",
         email: "",
         password: "",
-        userPhoto: null,
+        // userPhoto: null,
       },
-      file: "",
+      file: [],
+      userPhoto: null,
     };
+  },
+  computed: {
+    ...mapState({
+      error: "error",
+      error2: "error2",
+    }),
   },
   methods: {
     onSubmitSignIn(e) {
@@ -134,20 +141,13 @@ export default {
       e.preventDefault();
       this.$store.dispatch("signUp", this.formSignUp);
     },
-    uploadPhotoUser() {
-      //   const fileReader = new FileReader();
-      //   fileReader.onload = (e) => {
-      //     this.formSignUp.userPhoto = e.target.result;
-      //   };
-      //   fileReader.readAsDataURL(this.file);
-      //   console.log(this.formSignUp.userPhoto)
-      //   const reader = new FileReader(this.file);
-      //   reader.readAsDataURL(this.file);
-      //   console.log(reader)
-      //   reader.onload = (e) => {
-      //     console.log(e.target.result);
-      //     this.formSignUp.userPhoto = e.target.result;
-      //   };
+    uploadPhotoUser(e) {
+      const image = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = (e) => {
+        this.userPhoto = e.target.result;
+      };
     },
   },
 };
@@ -164,6 +164,8 @@ export default {
   background-color: darkcyan !important;
   font-size: 50px !important;
 }
-.uploader-photo {
+.error-msg {
+  color: red;
+  font-size: 20px;
 }
 </style>
