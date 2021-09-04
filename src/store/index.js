@@ -38,7 +38,6 @@ export default new Vuex.Store({
     },
     setToken(state, payload) {
       state.token = payload;
-      console.log(payload);
     },
     setUserPoints(state, payload) {
       state.userPoints = payload;
@@ -99,7 +98,6 @@ export default new Vuex.Store({
     },
     getUserData({ commit }, token) {
       const { name, email, userPhoto } = jwtDecoded(token);
-      console.log(jwtDecoded(token));
       const firstName = name.split(" ").shift();
       commit("setUserEmail", email);
       commit("setUserName", firstName);
@@ -134,7 +132,6 @@ export default new Vuex.Store({
       commit("setUserLevel", level);
     },
     async restartGame({ commit }, email) {
-      console.log(email);
       const res = await axios.put(`http://localhost:5000/restart-game`, {
         email,
       });

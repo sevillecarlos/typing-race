@@ -1,31 +1,10 @@
 <template>
   <div>
     <SideBar />
-    <b-overlay
-      :show="prepareTime !== 0 && showPrepare"
-      rounded="lg"
-      class="overlay-prepare"
-      variant="dark"
-      opacity="0.90"
-    >
-      <template #overlay>
-        <div class="overlay-content">
-          <div>
-            <span class="prepare-time">
-              {{ prepareTime }}
-            </span>
-          </div>
 
-          <div class="prepare-msg-container">
-            <p class="ready-msg" v-if="prepareTime === 3">
-              Get ready to type.
-            </p>
-            <p class="step-msg" v-else-if="prepareTime === 2">Ready?</p>
-            <p class="go-msg" v-else>Go!</p>
-          </div>
-        </div>
-      </template>
-      <b-overlay :show="time === 0" rounded="sm" variant="dark" opacity="0.90">
+    <div class="game-board">
+      <NavBar />
+      <b-overlay :show="time === 0" rounded="sm" variant="warning" opacity="0.90">
         <template #overlay>
           <div class="d-flex align-items-center">
             <div class="game-stop">
@@ -51,8 +30,31 @@
             </div>
           </div>
         </template>
-        <div class="game-board">
-          <div class="game-running">
+        <b-overlay
+          :show="prepareTime !== 0 && showPrepare"
+          rounded="lg"
+          class="overlay-prepare"
+          variant="warning"
+          opacity="0.9"
+        >
+          <template #overlay>
+            <div class="overlay-content">
+              <div>
+                <span class="prepare-time">
+                  {{ prepareTime }}
+                </span>
+              </div>
+
+              <div class="prepare-msg-container">
+                <p class="ready-msg" v-if="prepareTime === 3">
+                  Get ready to type.
+                </p>
+                <p class="step-msg" v-else-if="prepareTime === 2">Ready?</p>
+                <p class="go-msg" v-else>Go!</p>
+              </div>
+            </div>
+          </template>
+          <div class="game-board-container">
             <div v-if="token" class="user-score-board">
               <span class="user-level-score">
                 <span>Level:</span>
@@ -67,7 +69,6 @@
             <br />
             <div class="game-container">
               <Timer />
-
               <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
                 correctsLetter
               }}</span
@@ -96,10 +97,9 @@
               </button>
             </div>
           </div>
-          <br />
-        </div>
+        </b-overlay>
       </b-overlay>
-    </b-overlay>
+    </div>
   </div>
 </template>
 
@@ -107,12 +107,14 @@
 import axios from "axios";
 import Timer from "./Timer.vue";
 import SideBar from "../ui/SideBar.vue";
+import NavBar from "../ui/NavBar.vue";
 import { mapState } from "vuex";
 export default {
   name: "GameBoard",
   components: {
     Timer,
     SideBar,
+    NavBar,
   },
   data() {
     return {
@@ -135,9 +137,10 @@ export default {
   methods: {
     async getWord() {
       const res = await axios.get(
-        "https://random-word-api.herokuapp.com/word?number=1"
+        "https://random-word-api.herokuapp.com/word?number=5"
       );
-      const [data] = await res.data;
+      const [data] = await res.data.filter((v) => v.length < 14);
+      console.log(data);
       return data;
     },
 
@@ -188,7 +191,6 @@ export default {
       const countPrepareTime = setInterval(() => {
         let prepareTime = this.prepareTime;
         prepareTime--;
-        console.log(prepareTime);
         this.$store.commit("setPrepareTime", prepareTime);
         if (this.prepareTime === 0) {
           clearInterval(countPrepareTime);
@@ -197,11 +199,11 @@ export default {
       }, 1000);
     },
     clearState() {
-      (this.word = ""),
-        (this.correctsLetter = ""),
-        (this.counterLetter = 0),
-        (this.wordTypingCounter = 0),
-        (this.tempWord = "");
+      this.word = "";
+      this.correctsLetter = "";
+      this.counterLetter = 0;
+      this.wordTypingCounter = 0;
+      this.tempWord = "";
       this.completeWordCounter = 0;
     },
   },
@@ -229,9 +231,6 @@ export default {
       this.getNextWord();
     },
   },
-  userLevel() {
-    console.log(this.userLevel);
-  },
   mounted() {
     window.addEventListener("keypress", (ev) => {
       if (this.startGameKeyEvent && !this.pauseGame)
@@ -243,45 +242,39 @@ export default {
 
 <style>
 .game-board {
-  margin: auto;
-  padding: 50px;
-  border-left: 3px solid black;
-  border-right: 3px solid black;
-  background: rgba(0, 0, 0, 0.199);
+  margin-top: 10%;
+  padding: 25px;
+  background: #faa507fa !important;
+  border-radius: 10px;
 }
-.prepare-time {
-  font-size: 80px;
-  color: beige;
-  font-weight: bold;
+
+.game-container {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 100px;
 }
+
 .word {
   text-transform: uppercase;
   letter-spacing: 5px;
   color: rgb(0, 0, 0);
-  font-size: 100px;
   font-weight: bold;
 }
-.game-container {
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
 
-  text-align: center;
+.correct-letter {
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: bold;
+  font-size: 100px;
 }
 .input-word {
   padding: 15px;
   visibility: hidden;
 }
-.correct-letter {
-  color: beige;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-weight: bold;
-  font-size: 100px;
-}
+
 .timeout-msg {
   font-size: 65px;
-  color: beige;
   font-weight: bold;
 }
 .user-points {
@@ -291,10 +284,9 @@ export default {
 .level-label {
   font-weight: bold;
   font-size: 25px;
-  padding: 2.5px;
-  background: rgba(0, 0, 255, 0.445);
-  border-top: 2px solid black !important;
-  border-bottom: 2px solid black !important;
+  padding: 3px;
+  text-align: justify !important;
+  border-radius: 15px;
 }
 .user-level-score {
   font-size: 20px;
@@ -308,16 +300,9 @@ export default {
 .game-stop {
   text-align: center;
   padding: 15px;
+  color: black !important;;
 }
-.btn-container button {
-  border: none;
-  margin: 5px;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 15px;
-  border-top: 2px solid black !important;
-  border-bottom: 2px solid black !important;
-}
+
 .points-container {
   float: right;
 }
@@ -325,25 +310,36 @@ export default {
   font-weight: bold;
   font-size: 30px;
   padding: 1px;
-  border-top: 2px solid black !important;
-  border-bottom: 2px solid black !important;
-  background: rgba(255, 255, 0, 0.527);
+  border-radius: 15px;
 }
 .start-btn {
-  background: rgba(128, 255, 0, 0.295);
+  background: rgb(118, 216, 19);
+  margin-right: 10px;
 }
 .show-rules-btn {
-  background: rgba(0, 153, 255, 0.295);
+  background: rgb(50, 143, 206);
 }
-.btn-container button:hover {
-  color: beige;
+
+.start-btn:hover {
+  background: rgb(128, 255, 0);
 }
+.show-rules-btn:hover {
+  background: rgb(0, 153, 255);
+}
+
 .prepare-msg-container {
   font-size: 40px;
-  color: beige;
+  color: black;
+  font-weight: bold;
 }
+.prepare-time {
+  font-size: 80px;
+  color: black;
+  font-weight: bold;
+}
+
 .complete-word-msg {
-  color: beige;
+  color: black;
   font-size: 25px;
   font-weight: bold;
 }
@@ -354,28 +350,19 @@ export default {
   text-align: center;
 }
 .restart-btn {
-  background: rgba(143, 187, 108, 0.747);
+  background: rgb(115, 255, 0);
   font-size: 20px;
-  padding: 5px;
   font-weight: bold;
   border: none;
-  border-top: 2px solid black !important;
-  border-bottom: 2px solid black !important;
-}
-.restart-btn:hover {
-  color: beige !important;
 }
 .pause-btn {
-  background: rgba(74, 75, 77, 0.747);
-  font-size: 20px;
-  padding: 5px;
-  border: none;
-  border-top: 2px solid black !important;
-  border-bottom: 2px solid black !important;
+  font-size: 25px !important;
+  background: rgb(202, 42, 74) !important;
 }
 .pause-btn:hover {
-  color: beige !important;
+  background: crimson !important;
 }
+
 .not-sign-container * {
   color: beige;
   font-weight: bold;
@@ -386,13 +373,39 @@ export default {
   color: black !important;
   font-size: 20px;
   letter-spacing: 1px;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
   font-weight: bold;
   background: rgba(206, 14, 14, 0.507);
   padding: 5px;
 }
 .sign-in-link-overlay:hover {
   color: beige !important;
+}
+/***************************************************************************/
+/* Big tablets to 1200px*/
+@media only screen and (max-width: 1200px) {
+  .word {
+    font-size: 70px;
+  }
+}
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .word {
+    font-size: 50px;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .word {
+    font-size: 50px;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .word {
+    font-size: 50px;
+  }
 }
 </style>

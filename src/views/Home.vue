@@ -16,13 +16,10 @@ export default {
 </script>
 <style scoped>
 .home {
-  margin-top: 50px;
+  margin-top: 1px;
   margin-left: auto;
   margin-right: auto;
-  padding: 50px;
-  width: 80%;
-  border-top: 3px solid black;
-  background: rgba(0, 0, 0, 0.171);
-  border-bottom: 3px solid black;
+  padding: 10px;
+  width: 75%;
 }
 </style>

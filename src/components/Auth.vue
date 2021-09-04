@@ -279,7 +279,5 @@ button[type="submit"] {
   border-right: 2px solid black !important;
   border-left: 2px solid black !important;
 }
-.item-tab {
-  color: blue !important;
-}
+
 </style>
