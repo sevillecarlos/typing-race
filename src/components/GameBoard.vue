@@ -4,7 +4,12 @@
 
     <div class="game-board">
       <NavBar />
-      <b-overlay :show="time === 0" rounded="sm" variant="warning" opacity="0.90">
+      <b-overlay
+        :show="time === 0"
+        rounded="sm"
+        variant="warning"
+        opacity="0.90"
+      >
         <template #overlay>
           <div class="d-flex align-items-center">
             <div class="game-stop">
@@ -17,15 +22,12 @@
               <span class="complete-word-msg"
                 >You complete {{ completeWordCounter }} words</span
               >
-              <br />.
+              <br />
               <div v-if="!token" class="not-sign-container">
                 <p class="not-sign-in-msg">
-                  Not Sing In? Sign In so you can up levels and become a typing
+                  Not Sign In? Sign In, so you can up levels and become a typing
                   race master
                 </p>
-                <a class="sign-in-link-overlay" href="/authentication"
-                  >Sing In</a
-                >
               </div>
             </div>
           </div>
@@ -75,7 +77,7 @@
               ><span class="word">{{ word }}</span>
             </div>
             <div v-if="!startGame" class="btn-container">
-              <button @click="startCounter" class="start-btn">
+              <button :disabled="!word" @click="startCounter" class="start-btn">
                 Start Game
               </button>
 
@@ -300,7 +302,7 @@ export default {
 .game-stop {
   text-align: center;
   padding: 15px;
-  color: black !important;;
+  color: black !important;
 }
 
 .points-container {
@@ -313,17 +315,10 @@ export default {
   border-radius: 15px;
 }
 .start-btn {
-  background: rgb(118, 216, 19);
+  background: rgb(115, 255, 0) !important;
   margin-right: 10px;
 }
 .show-rules-btn {
-  background: rgb(50, 143, 206);
-}
-
-.start-btn:hover {
-  background: rgb(128, 255, 0);
-}
-.show-rules-btn:hover {
   background: rgb(0, 153, 255);
 }
 
@@ -350,23 +345,20 @@ export default {
   text-align: center;
 }
 .restart-btn {
-  background: rgb(115, 255, 0);
+  background: rgb(115, 255, 0) !important;
   font-size: 20px;
   font-weight: bold;
   border: none;
 }
 .pause-btn {
   font-size: 25px !important;
-  background: rgb(202, 42, 74) !important;
-}
-.pause-btn:hover {
-  background: crimson !important;
+  background: rgb(255, 0, 51) !important;
 }
 
 .not-sign-container * {
-  color: beige;
+  color: rgb(0, 0, 0);
   font-weight: bold;
-  padding: 15px;
+  padding: 10px;
 }
 .sign-in-link-overlay {
   text-decoration: none;
@@ -404,8 +396,120 @@ export default {
 
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
-  .word {
-    font-size: 50px;
+  .game-board {
+    margin-top: 3%;
+    padding: 15px;
+  }
+
+  .game-container {
+    margin-top: 5px;
+  }
+
+  .correct-letter {
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-size: 100px;
+  }
+  .input-word {
+    padding: 15px;
+    visibility: hidden;
+  }
+
+  .timeout-msg {
+    font-size: 65px;
+    font-weight: bold;
+  }
+  .user-points {
+    color: black;
+    font-size: 20px;
+  }
+  .level-label {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 3px;
+    text-align: justify !important;
+    border-radius: 15px;
+  }
+  .user-level-score {
+    font-size: 20px;
+    float: left;
+    color: black;
+  }
+  .btn-container {
+    text-align: center;
+    padding: 10px;
+  }
+  .game-stop {
+    text-align: center;
+    padding: 15px;
+    color: black !important;
+  }
+
+  .points-container {
+    float: right;
+  }
+  .points {
+    font-weight: bold;
+    font-size: 30px;
+    padding: 1px;
+    border-radius: 15px;
+  }
+  .start-btn {
+    background: rgb(115, 255, 0) !important;
+    margin-right: 10px;
+  }
+  .show-rules-btn {
+    background: rgb(0, 153, 255);
+  }
+
+  .prepare-msg-container {
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+  }
+  .prepare-time {
+    font-size: 80px;
+    color: black;
+    font-weight: bold;
+  }
+
+  .complete-word-msg {
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .overlay-content {
+    text-align: center;
+  }
+  .pause-btn-container {
+    text-align: center;
+  }
+  .restart-btn {
+    background: rgb(115, 255, 0) !important;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+  }
+  .pause-btn {
+    font-size: 25px !important;
+    background: rgb(255, 0, 51) !important;
+  }
+
+  .not-sign-container * {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 10px;
+  }
+  .sign-in-link-overlay {
+    text-decoration: none;
+    color: black !important;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    background: rgba(206, 14, 14, 0.507);
+    padding: 5px;
   }
 }
 </style>

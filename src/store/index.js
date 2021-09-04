@@ -69,25 +69,33 @@ export default new Vuex.Store({
   },
   actions: {
     async signIn({ commit }, payload) {
-      const res = await axios.post(`http://localhost:5000/signin`, payload);
-      const data = await res.data;
-      if (data?.error) {
-        commit("setError", data.error);
-      } else {
-        const { jwtToken } = data;
-        commit("setToken", jwtToken);
-        localStorage.setItem("@uth", jwtToken);
+      try {
+        const res = await axios.post(`http://localhost:5000/signin`, payload);
+        const data = await res.data;
+        if (data?.error) {
+          commit("setError", data.error);
+        } else {
+          const { jwtToken } = data;
+          commit("setToken", jwtToken);
+          localStorage.setItem("@uth", jwtToken);
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
     async signUp({ commit }, payload) {
-      const res = await axios.post(`http://localhost:5000/signup`, payload);
-      const data = await res.data;
-      if (data?.error) {
-        commit("setError2", data.error);
-      } else {
-        const { jwtToken } = data;
-        commit("setToken", jwtToken);
-        localStorage.setItem("@uth", jwtToken);
+      try {
+        const res = await axios.post(`http://localhost:5000/signup`, payload);
+        const data = await res.data;
+        if (data?.error) {
+          commit("setError2", data.error);
+        } else {
+          const { jwtToken } = data;
+          commit("setToken", jwtToken);
+          localStorage.setItem("@uth", jwtToken);
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
     getToken({ commit }) {
@@ -109,39 +117,54 @@ export default new Vuex.Store({
     },
 
     async getUserGameData({ commit }, email) {
-      const res = await axios.post(`http://localhost:5000/get-user-data-game`, {
-        email,
-      });
-      const {
-        user: { points, level, time },
-      } = await res.data;
-      commit("setUserPoints", points);
-      commit("setUserLevel", level);
-      commit("setTime", time);
-      commit("setOriginalTime", time);
+      try {
+        const res = await axios.post(
+          `http://localhost:5000/get-user-data-game`,
+          {
+            email,
+          }
+        );
+        const {
+          user: { points, level, time },
+        } = await res.data;
+        commit("setUserPoints", points);
+        commit("setUserLevel", level);
+        commit("setTime", time);
+        commit("setOriginalTime", time);
+      } catch (error) {
+        console.log(error);
+      }
     },
     async addUserGameData({ commit }, gameData) {
-      const res = await axios.post(
-        `http://localhost:5000/add-user-game-data`,
-        gameData
-      );
-      const { user } = await res.data;
-      const [userData] = user;
-      const { points, level } = userData;
-      commit("setUserPoints", points);
-      commit("setUserLevel", level);
+      try {
+        const res = await axios.post(
+          `http://localhost:5000/add-user-game-data`,
+          gameData
+        );
+        const { user } = await res.data;
+        const [userData] = user;
+        const { points, level } = userData;
+        commit("setUserPoints", points);
+        commit("setUserLevel", level);
+      } catch (error) {
+        console.log(error);
+      }
     },
     async restartGame({ commit }, email) {
-      const res = await axios.put(`http://localhost:5000/restart-game`, {
-        email,
-      });
-      const {
-        user: { points, level, time },
-      } = await res.data;
-      commit("setUserPoints", points);
-      commit("setUserLevel", level);
-      commit("setTime", time);
-      commit("setOriginalTime", time);
+      try {
+        const res = await axios.put(`http://localhost:5000/restart-game`, {
+          email,
+        });
+        const {
+          user: { points, level, time },
+        } = await res.data;
+        commit("setUserPoints", points);
+        commit("setUserLevel", level);
+        commit("setTime", time);
+        commit("setOriginalTime", time);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   modules: {},

@@ -4,13 +4,16 @@
       <b-navbar-brand class="brand" href="/">
         <b-img
           :src="brandLogo"
-          class="brand-logo"
+          class="brand-logo-nav"
           fluid
-          alt="Responsive image"
+          alt="Logo Image Typing Race"
         ></b-img>
         Typing Race
       </b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle
+        target="nav-collapse"
+        class="toggle-nav-bar"
+      ></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav v-if="!token">
           <b-nav-item class="sign-link" href="/authentication"
@@ -46,9 +49,8 @@
                 >
               </b-card>
             </b-collapse>
-            <b-dropdown-item class="sign-out-item" @click="signOut"
-              >Sign Out</b-dropdown-item
-            >
+            <br />
+            <b-button class="sign-out" @click="signOut">Sign Out</b-button>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -123,12 +125,28 @@ export default {
   font-size: 30px;
 }
 .dropdown-user {
-  font-size: 20px;
+  font-size: 25px;
   letter-spacing: 1px;
-  transition: 0.5s background;
   text-align: center;
   font-weight: bold;
-  transition: 0.5s background;
+}
+.user-name {
+  color: black;
+  font-style: normal;
+}
+.user-photo {
+  width: 80px !important;
+  height: 80px !important;
+  background-color: rgba(255, 0, 106, 0.253) !important;
+
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  transition: 0.5s box-shadow;
+}
+
+.user-photo:hover {
+  box-shadow: -1px 4px 21px -3px rgba(0, 0, 0, 0.164);
 }
 
 .nav-bar {
@@ -140,62 +158,43 @@ export default {
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
 .brand {
-  font-size: 30px !important;
+  font-size: 40px !important;
   color: black !important;
   font-weight: bold !important;
+  margin-left: 25%;
 }
-.brand-logo {
+.brand-logo-nav {
   width: 100px;
   padding: 5px;
 }
-.sign-link{
-  margin-left: 400px;
-}
+
 .sign-link a {
   text-decoration: none;
   color: black !important;
   font-size: 20px;
   letter-spacing: 1px;
   font-weight: bold;
-  background: rgb(206, 14, 14);
+  background: rgb(255, 0, 0);
   border-radius: 50px !important;
-  padding: 10px;
+  padding: 10px !important;
   box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
 .sign-link a:hover {
-  background: rgb(240, 25, 25);
-}
-.user-name {
-  color: black;
-  font-style: normal;
-}
-.user-photo {
-  width: 80px !important;
-  height: 80px !important;
+  box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
 }
 
-.user-photo:hover {
-  box-shadow: -1px 4px 21px -3px rgba(0, 0, 0, 0.164);
-}
-.sign-out-item {
-  background: rgba(109, 99, 99, 0.322);
-  border-top: 1.5px solid black;
-  border-bottom: 1.5px solid black;
-  width: 70% !important;
-  margin: auto !important;
+.sign-out {
+  font-size: 15px !important;
 }
 .restart-game-item {
-  background: rgba(175, 94, 94, 0.322);
-  border: none !important;
-  border-top: 1.5px solid black !important;
-  border-bottom: 1.5px solid black !important;
-  margin-bottom: 2px !important;
-  font-size: 18px !important;
-  width: 70% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  font-size: 15px !important;
+  margin-bottom: 10px;
+  padding: 10px !important;
+  background-color: #ff3333 !important;
 }
 .restart-game-item:hover {
   background: rgba(189, 163, 163, 0.932);
@@ -203,36 +202,172 @@ export default {
 
 .menu-user-profile {
   padding: 5px !important;
-  background: rgba(246, 247, 245, 0.979) !important;
-  border-bottom: 2px solid black !important;
-  border-top: 2px solid black !important;
-  border-radius: 0px !important;
+  border: none !important;
+  background: #faa507fa !important;
+  border-radius: 15px !important;
   text-align: center !important;
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
 .confirmation-restart-collapse {
-  background: rgba(255, 255, 255, 0.932) !important;
+  background: rgba(0, 0, 0, 0.932) !important;
+  border-radius: 15px !important;
+  border: none !important;
 }
 .card-collapse {
-  background: rgba(110, 104, 110, 0.253) !important;
-  border-radius: 0px !important;
-  border-right: 2px solid black !important;
-  border-left: 2px solid black !important;
+  background: #f58b00 !important;
+  border-radius: 15px !important;
   margin-bottom: 5px;
-}
-.button {
-  color: black !important;
-  border-radius: 0px !important;
-  padding: 5px !important;
-  margin-right: 5px !important;
   border: none !important;
-  border-right: 2px solid black !important;
-  border-left: 2px solid black !important;
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
 
 .restart {
-  background: rgba(255, 0, 0, 0.411) !important;
+  background: rgb(255, 0, 0) !important;
+  margin-right: 10px;
+  font-size: 15px !important;
 }
 .cancel {
-  background: rgba(238, 214, 170, 0.493) !important;
+  background: rgb(238, 214, 170) !important;
+  font-size: 15px !important;
+}
+
+/* Big tablets to 1200px*/
+@media only screen and (max-width: 1200px) {
+}
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .nav-bar {
+    padding: 5px;
+  }
+  .brand {
+    font-size: 25px !important;
+    color: black !important;
+    font-weight: bold !important;
+    margin-left: 1%;
+  }
+  .brand-logo-nav {
+    width: 50px;
+    padding: 5px;
+  }
+  .toggle-nav-bar {
+    width: 50px;
+  }
+
+  .restart-modal {
+    font-weight: bold !important;
+  }
+  .restart-modal-header {
+    font-size: 50px !important;
+  }
+  .restart-modal-content {
+    background: beige !important;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .dropdown-user {
+    font-size: 25px;
+    letter-spacing: 1px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .user-name {
+    color: black;
+    font-style: normal;
+  }
+  .user-photo {
+    width: 80px !important;
+    height: 80px !important;
+    box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    transition: 0.5s box-shadow;
+  }
+
+  .user-photo:hover {
+    box-shadow: -1px 4px 21px -3px rgba(0, 0, 0, 0.164);
+  }
+
+  .sign-link a {
+    text-decoration: none;
+    color: black !important;
+    font-size: 20px;
+    width: 40%;
+    margin: auto;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+    background: rgb(255, 0, 0);
+    border-radius: 50px !important;
+    padding: 10px !important;
+    box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  }
+  .sign-link a:hover {
+    box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
+    -moz-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
+  }
+
+  .sign-out {
+    font-size: 15px !important;
+  }
+  .restart-game-item {
+    font-size: 15px !important;
+    margin-bottom: 10px;
+    padding: 10px !important;
+    background-color: #ff3333 !important;
+  }
+  .restart-game-item:hover {
+    background: rgba(189, 163, 163, 0.932);
+  }
+
+  .menu-user-profile {
+    padding: 5px !important;
+    border: none !important;
+    background: #faa507fa !important;
+    border-radius: 15px !important;
+    text-align: center !important;
+    box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  }
+  .confirmation-restart-collapse {
+    background: rgba(0, 0, 0, 0.932) !important;
+    border-radius: 15px !important;
+    border: none !important;
+  }
+  .card-collapse {
+    background: #f58b00 !important;
+    border-radius: 15px !important;
+    margin-bottom: 5px;
+    border: none !important;
+    box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  }
+
+  .restart {
+    background: rgb(255, 0, 0) !important;
+    margin-right: 10px;
+    font-size: 15px !important;
+  }
+  .cancel {
+    background: rgb(238, 214, 170) !important;
+    font-size: 15px !important;
+  }
 }
 </style>

@@ -2,7 +2,12 @@
   <b-sidebar no-header id="sidebar-1" title="Typing Race Rules" shadow>
     <div class="px-3 py-2">
       <div class="logo-image-container">
-        <b-img :src="logo" fluid class="logo-image" alt="Typing-Race Logo"></b-img>
+        <b-img
+          :src="logo"
+          fluid
+          class="logo-image"
+          alt="Typing-Race Logo"
+        ></b-img>
       </div>
 
       <div class="instructions">
@@ -51,7 +56,7 @@ export default {
 .logo-image-container {
   text-align: center;
 }
-.logo-image{
+.logo-image {
   width: 100px;
 }
 .level-ranking,
@@ -82,12 +87,17 @@ export default {
   font-size: 20px;
   letter-spacing: 1px;
   font-weight: bold;
-  background: rgb(206, 14, 14);
+  background: rgb(255, 0, 0);
   border-radius: 50px !important;
   padding: 15px;
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
 .sign-in-link:hover {
-  background: rgb(240, 25, 25);
+  box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
 }
 .sign-in-container {
   margin-top: 50px;
