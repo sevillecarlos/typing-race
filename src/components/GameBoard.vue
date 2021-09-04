@@ -1,23 +1,40 @@
 <template>
   <div class="game-board">
-    <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
-      correctsLetter
-    }}</span
-    ><span class="word">{{ word }}</span>
+    <div class="game-running" v-if="time !== 0">
+      <button v-if="!startGame" @click="startCounter" class="restart-btn">
+        Start Game
+      </button>
+      <Timer />
+      <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
+        correctsLetter
+      }}</span
+      ><span class="word">{{ word }}</span>
+    </div>
+    <div class="game-stop" v-else>
+      <span class="timeout-msg">Your time finish</span>
+      <br />
+      <button @click="restartGame" class="restart-btn">Restart Game</button>
+    </div>
     <br />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Timer from "./Timer.vue";
+import { mapState } from "vuex";
 export default {
+  name: "GameBoard",
+  components: {
+    Timer,
+  },
   data() {
     return {
       word: "",
       correctsLetter: "",
-      inputLetter: "",
       counterLetter: 0,
       wordTypingCounter: 0,
+      tempWord: "",
     };
   },
   created() {
@@ -30,40 +47,47 @@ export default {
       );
       const [data] = await res.data;
       this.word = data;
+      this.tempWord = data;
     },
-    checkWord() {
-      console.log(this.word[this.counterLetter]);
-      if (this.word[this.counterLetter] === this.inputLetter) {
+    checkWord(letter) {
+      if (this.tempWord[this.counterLetter] === letter) {
         this.counterLetter++;
+        this.word = this.word.replace(letter, "");
 
-        const accertLetter = this.word.slice(0, this.counterLetter);
-        console.log(accertLetter);
-        // this.word = this.word.replace(accertLetter, "");
-        this.correctsLetter = accertLetter;
+        this.correctsLetter = this.tempWord.slice(0, this.counterLetter);
         if (this.word.length === 0) {
           this.getWord();
           this.counterLetter = 0;
+          this.correctsLetter = "";
         }
       }
     },
+    restartGame() {
+      this.clearState();
+      this.getWord();
+      this.$store.commit("setTime", -1);
+    },
+    startCounter() {
+      this.$store.commit("setStartGame", true);
+    },
+    clearState() {
+      (this.word = ""),
+        (this.correctsLetter = ""),
+        (this.counterLetter = 0),
+        (this.wordTypingCounter = 0),
+        (this.tempWord = "");
+    },
   },
   computed: {
-    cWord() {
-      return this.word;
-    },
-    cInputLetter() {
-      return this.inputLetter;
-    },
+    ...mapState({
+      time: "time",
+      startGame: "startGame",
+    }),
   },
-  watch: {
-    inputLetter() {
-      this.checkWord();
-    },
-  },
+  watch: {},
   mounted() {
-    window.addEventListener("keypress", (e) => {
-      console.log(e.key);
-      this.inputLetter = e.key;
+    window.addEventListener("keypress", (ev) => {
+      this.checkWord(ev.key);
     });
   },
 };
@@ -71,7 +95,7 @@ export default {
 
 <style>
 .game-board {
-  background-color: blue;
+  background-color: rgb(69, 82, 39);
   width: 50%;
   margin: auto;
   padding: 50px;
@@ -79,7 +103,7 @@ export default {
 .word {
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: brown;
+  color: rgb(0, 0, 0);
   font-size: 70px;
 }
 .input-word {
@@ -91,5 +115,14 @@ export default {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 70px;
+}
+.timeout-msg {
+  font-size: 80px;
+  color: black;
+}
+.restart-btn {
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 20px;
 }
 </style>
