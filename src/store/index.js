@@ -70,7 +70,10 @@ export default new Vuex.Store({
   actions: {
     async signIn({ commit }, payload) {
       try {
-        const res = await axios.post(`http://localhost:5000/signin`, payload);
+        const res = await axios.post(
+          `${process.env.VUE_APP_URL}/signin`,
+          payload
+        );
         const data = await res.data;
         if (data?.error) {
           commit("setError", data.error);
@@ -85,7 +88,7 @@ export default new Vuex.Store({
     },
     async signUp({ commit }, payload) {
       try {
-        const res = await axios.post(`http://localhost:5000/signup`, payload);
+        const res = await axios.post(`${process.env.VUE_APP_URL}/signup`, payload);
         const data = await res.data;
         if (data?.error) {
           commit("setError2", data.error);
@@ -119,7 +122,7 @@ export default new Vuex.Store({
     async getUserGameData({ commit }, email) {
       try {
         const res = await axios.post(
-          `http://localhost:5000/get-user-data-game`,
+          `${process.env.VUE_APP_URL}/get-user-data-game`,
           {
             email,
           }
@@ -138,7 +141,7 @@ export default new Vuex.Store({
     async addUserGameData({ commit }, gameData) {
       try {
         const res = await axios.post(
-          `http://localhost:5000/add-user-game-data`,
+          `${process.env.VUE_APP_URL}/add-user-game-data`,
           gameData
         );
         const { user } = await res.data;
@@ -152,7 +155,7 @@ export default new Vuex.Store({
     },
     async restartGame({ commit }, email) {
       try {
-        const res = await axios.put(`http://localhost:5000/restart-game`, {
+        const res = await axios.put(`${process.env.VUE_APP_URL}/restart-game`, {
           email,
         });
         const {
