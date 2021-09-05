@@ -60,17 +60,18 @@
             <div v-if="token" class="user-score-board">
               <span class="user-level-score">
                 <span>Level:</span>
-                <span class="level-label">{{ userLevel }}</span>
+                <span class="level">{{ userLevel }}</span>
               </span>
               <div class="points-container">
                 <span class="user-points"
-                  >Points: <span class="points">{{ userPoints }}</span>
+                  >Points:<span class="points">{{ userPoints }}</span>
                 </span>
               </div>
             </div>
             <br />
             <div class="game-container">
               <Timer />
+              <br />
               <span v-if="correctsLetter.length !== 0" class="correct-letter">{{
                 correctsLetter
               }}</span
@@ -141,7 +142,7 @@ export default {
       const res = await axios.get(
         "https://random-word-api.herokuapp.com/word?number=5"
       );
-      const [data] = await res.data.filter((v) => v.length < 14);
+      const [data] = await res.data.filter((v) => v.length < 11);
       console.log(data);
       return data;
     },
@@ -267,6 +268,7 @@ export default {
   color: #ffffff;
   text-transform: uppercase;
   font-weight: bold;
+  letter-spacing: 2px;
   font-size: 100px;
 }
 .input-word {
@@ -281,7 +283,12 @@ export default {
   color: black;
   font-size: 20px;
 }
-.level-label {
+
+.user-score-board {
+  padding: 2%;
+}
+
+.level {
   font-weight: bold;
   font-size: 25px;
   padding: 3px;
@@ -310,6 +317,8 @@ export default {
   font-weight: bold;
   font-size: 30px;
   padding: 1px;
+  padding: 15px;
+
   border-radius: 15px;
 }
 .start-btn {
@@ -374,167 +383,30 @@ export default {
 /* Big tablets to 1200px*/
 @media only screen and (max-width: 1200px) {
   .game-board {
-  margin-top: 1%;
-  padding: 25px;
-  background: #faa507fa !important;
-  border-radius: 10px;
-}
-
-.game-container {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 100px;
-}
-
-.word {
-  text-transform: uppercase;
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-}
-
-.correct-letter {
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-weight: bold;
-  font-size: 100px;
-}
-.input-word {
-  padding: 15px;
-  visibility: hidden;
-}
-
-.timeout-msg {
-  font-size: 65px;
-  font-weight: bold;
-}
-.user-points {
-  color: black;
-  font-size: 20px;
-}
-.level-label {
-  font-weight: bold;
-  font-size: 25px;
-  padding: 3px;
-  text-align: justify !important;
-  border-radius: 15px;
-}
-.user-level-score {
-  font-size: 20px;
-  float: left;
-  color: black;
-}
-.btn-container {
-  text-align: center;
-  padding: 10px;
-}
-.game-stop {
-  text-align: center;
-  padding: 15px;
-  color: black !important;
-}
-
-.points-container {
-  float: right;
-}
-.points {
-  font-weight: bold;
-  font-size: 30px;
-  padding: 1px;
-  border-radius: 15px;
-}
-.start-btn {
-  background: rgb(115, 255, 0) !important;
-  margin-right: 10px;
-}
-.show-rules-btn {
-  background: rgb(0, 153, 255);
-}
-
-.prepare-msg-container {
-  font-size: 40px;
-  color: black;
-  font-weight: bold;
-}
-.prepare-time {
-  font-size: 80px;
-  color: black;
-  font-weight: bold;
-}
-
-.complete-word-msg {
-  color: black;
-  font-size: 25px;
-  font-weight: bold;
-}
-.overlay-content {
-  text-align: center;
-}
-.pause-btn-container {
-  text-align: center;
-}
-.restart-btn {
-  background: rgb(115, 255, 0) !important;
-  font-size: 20px;
-  font-weight: bold;
-  border: none;
-}
-.pause-btn {
-  font-size: 25px !important;
-  background: rgb(255, 0, 51) !important;
-}
-
-.not-sign-container * {
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  padding: 10px;
-}
-.sign-in-link-overlay {
-  text-decoration: none;
-  color: black !important;
-  font-size: 20px;
-  letter-spacing: 1px;
-  font-weight: bold;
-  background: rgba(206, 14, 14, 0.507);
-  padding: 5px;
-}
-.sign-in-link-overlay:hover {
-  color: beige !important;
-}
-}
-
-/* Small tablets to big tablets: from 768 to 1032*/
-@media only screen and (max-width: 1032px) {
-  .word {
-    font-size: 50px;
-  }
-}
-
-/* Small phones to small tablets: from 481 to 767*/
-@media only screen and (max-width: 767px) {
-  .word {
-    font-size: 50px;
-  }
-}
-
-/*Small Phone from 0 to 480px*/
-@media only screen and (max-width: 400px) {
-  .game-board {
     margin-top: 1%;
-    padding: 15px;
+    padding: 25px;
+    background: #faa507fa !important;
+    border-radius: 10px;
   }
-  .restart-btn {
-  font-size: 15px !important;
-}
-  .word {
-    font-size: 40px;
-  }
+
   .game-container {
-    margin-top: 5px;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 100px;
+  }
+
+  .word {
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
   }
 
   .correct-letter {
-    font-size: 40px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-size: 100px;
   }
   .input-word {
     padding: 15px;
@@ -542,12 +414,12 @@ export default {
   }
 
   .timeout-msg {
-    font-size: 10px;
+    font-size: 65px;
     font-weight: bold;
   }
   .user-points {
     color: black;
-    font-size: 15px;
+    font-size: 20px;
   }
   .level-label {
     font-weight: bold;
@@ -610,7 +482,12 @@ export default {
   .pause-btn-container {
     text-align: center;
   }
-
+  .restart-btn {
+    background: rgb(115, 255, 0) !important;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+  }
   .pause-btn {
     font-size: 25px !important;
     background: rgb(255, 0, 51) !important;
@@ -619,8 +496,7 @@ export default {
   .not-sign-container * {
     color: rgb(0, 0, 0);
     font-weight: bold;
-    padding: 1px;
-    font-size:15px
+    padding: 10px;
   }
   .sign-in-link-overlay {
     text-decoration: none;
@@ -630,6 +506,232 @@ export default {
     font-weight: bold;
     background: rgba(206, 14, 14, 0.507);
     padding: 5px;
+  }
+  .sign-in-link-overlay:hover {
+    color: beige !important;
+  }
+}
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+    .game-board {
+    margin-top: 3%;
+    padding: 5px;
+  }
+  .restart-btn {
+    font-size: 25px !important;
+  }
+  .word,
+  .correct-letter {
+    font-size: 80px;
+    letter-spacing: 1px;
+  }
+  .game-container {
+    margin-top: 2px;
+  }
+
+
+  .prepare-msg-container {
+    font-size: 50px;
+    color: black;
+    font-weight: bold;
+  }
+  .prepare-time {
+    font-size: 55px;
+    color: black;
+    font-weight: bold;
+  }
+  .timeout-msg {
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  .game-stop {
+    padding: 5px;
+  }
+  .not-sign-container * {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 1px;
+    font-size: 25px;
+  }
+  .complete-word-msg {
+    font-size: 25px;
+  }
+
+  .user-points {
+    color: black;
+    font-size: 25px;
+  }
+  .level {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    text-align: justify !important;
+    border-radius: 15px;
+  }
+  .user-level-score {
+    font-size: 24px;
+    float: left;
+    color: black;
+  }
+
+  .points {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    border-radius: 15px;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .game-board {
+    margin-top: 3%;
+    padding: 5px;
+  }
+  .restart-btn {
+    font-size: 20px !important;
+  }
+  .word,
+  .correct-letter {
+    font-size: 60px;
+    letter-spacing: 1px;
+  }
+  .game-container {
+    margin-top: 2px;
+  }
+
+
+  .prepare-msg-container {
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+  }
+  .prepare-time {
+    font-size: 45px;
+    color: black;
+    font-weight: bold;
+  }
+  .timeout-msg {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .game-stop {
+    padding: 5px;
+  }
+  .not-sign-container * {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 1px;
+    font-size: 20px;
+  }
+  .complete-word-msg {
+    font-size: 20px;
+  }
+
+  .user-points {
+    color: black;
+    font-size: 20px;
+  }
+  .level {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    text-align: justify !important;
+    border-radius: 15px;
+  }
+  .user-level-score {
+    font-size: 20px;
+    float: left;
+    color: black;
+  }
+
+  .points {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    border-radius: 15px;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .game-board {
+    margin-top: 1%;
+    padding: 1px;
+  }
+  .restart-btn {
+    font-size: 15px !important;
+  }
+  .word,
+  .correct-letter {
+    font-size: 40px;
+    letter-spacing: 1px;
+  }
+  .game-container {
+    margin-top: 1px;
+  }
+
+  .start-btn {
+    background: rgb(115, 255, 0) !important;
+    margin-right: 10px;
+  }
+  .show-rules-btn {
+    background: rgb(0, 153, 255);
+  }
+
+  .prepare-msg-container {
+    font-size: 30px;
+    color: black;
+    font-weight: bold;
+  }
+  .prepare-time {
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+  }
+  .timeout-msg {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .game-stop {
+    padding: 5px;
+  }
+  .not-sign-container * {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 1px;
+    font-size: 15px;
+  }
+  .complete-word-msg {
+    font-size: 15px;
+  }
+
+  .user-points {
+    color: black;
+    font-size: 15px;
+  }
+  .level {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    text-align: justify !important;
+    border-radius: 15px;
+  }
+  .user-level-score {
+    font-size: 15px;
+    float: left;
+    color: black;
+  }
+
+  .points {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    border-radius: 15px;
   }
 }
 </style>

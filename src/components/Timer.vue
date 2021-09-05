@@ -1,9 +1,7 @@
 <template>
-  <div class="timer">
-    <span class="time">
-      {{ time }}
-    </span>
-  </div>
+  <span class="time">
+    {{ time }}
+  </span>
 </template>
 
 <script>
@@ -57,9 +55,6 @@ export default {
 </script>
 
 <style>
-.timer{
-  text-align: center;
-}
 .time {
   font-size: 40px;
   color: black;
@@ -68,26 +63,22 @@ export default {
 
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
-.time {
-  font-size: 30px;
-  color: black;
-  font-weight: bold;
-}
+  .time {
+    font-size: 40px;
+  }
 }
 
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
-.time {
-  font-size: 30px;
-  color: black;
-  font-weight: bold;
-}
+  .time {
+    font-size: 35px;
+  }
 }
 
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
-.time {
-  font-size: 30px;
-}
+  .time {
+    font-size: 30px;
+  }
 }
 </style>

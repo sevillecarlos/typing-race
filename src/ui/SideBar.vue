@@ -87,7 +87,7 @@ export default {
   font-size: 20px;
   letter-spacing: 1px;
   font-weight: bold;
-  background: rgb(255, 0, 0);
+  background: rgb(235, 252, 8);
   border-radius: 50px !important;
   padding: 15px;
   box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
@@ -103,5 +103,97 @@ export default {
   margin-top: 50px;
   font-weight: bold;
   font-size: 20px;
+}
+
+/* Big tablets to 1200px*/
+@media only screen and (max-width: 1200px) {
+}
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  
+  .sign-in-link {
+    font-size: 25px;
+    padding: 20px;
+  }
+  .sign-in-container {
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 25px;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+    #sidebar-1 {
+    width: 50%;
+  }
+  .logo-image-container {
+    text-align: center;
+  }
+  .logo-image {
+    width: 90px;
+  }
+  .level-ranking,
+  .instructions {
+    margin-top: 3%;
+    text-align: center;
+    font-size: 15px;
+  }
+  .level-ranking h5,
+  .instructions h5 {
+    padding: 1px;
+    font-size: 20px;
+  }
+
+  .def {
+    font-size: 15px;
+  }
+  .sign-in-link {
+    font-size: 20px;
+    padding: 15px;
+  }
+  .sign-in-container {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  #sidebar-1 {
+    width: 50%;
+  }
+  .logo-image-container {
+    text-align: center;
+  }
+  .logo-image {
+    width: 70px;
+  }
+  .level-ranking,
+  .instructions {
+    margin-top: 2%;
+    text-align: center;
+    font-size: 12px;
+  }
+  .level-ranking h5,
+  .instructions h5 {
+    padding: 1px;
+    font-size: 15px;
+  }
+
+  .def {
+    font-size: 15px;
+  }
+  .sign-in-link {
+    font-size: 15px;
+    padding: 10px;
+  }
+  .sign-in-container {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+  }
 }
 </style>

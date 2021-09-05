@@ -46,10 +46,27 @@ button[type="submit"] {
 
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
+  #app {
+    width: 100%;
+    margin: auto;
+  }
+  button {
+    padding: 15px;
+    font-size: 25px !important;
+  }
+  
 }
 
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
+  #app {
+    width: 100%;
+    margin: auto;
+  }
+  button {
+    padding: 15px;
+    font-size: 20px !important;
+  }
 }
 
 /*Small Phone from 0 to 480px*/
@@ -57,6 +74,10 @@ button[type="submit"] {
   #app {
     width: 100%;
     margin: auto;
+  }
+  button {
+    padding: 10px;
+    font-size: 15px !important;
   }
 }
 </style>

@@ -28,10 +28,16 @@ export default {
 
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
+    .home {
+    width: 100%;
+  }
 }
 
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
+    .home {
+    width: 100%;
+  }
 }
 
 /*Small Phone from 0 to 480px*/

@@ -19,7 +19,6 @@
           autocomplete="off"
         >
           <div class="logo-container">
-            <h4>Sign In</h4>
             <b-img
               :src="logo"
               class="brand-logo"
@@ -63,7 +62,7 @@
             Show Password
           </b-form-checkbox>
           <span v-if="error" class="error-msg">{{ error }}</span>
-          <b-button type="submit" variant="primary">Login</b-button>
+          <b-button type="submit">Login</b-button>
         </b-form>
       </b-tab>
       <b-tab title="Sing Up" title-link-class="title-tab">
@@ -73,7 +72,6 @@
           autocomplete="off"
         >
           <div class="logo-container">
-            <h4>Sign Up</h4>
             <b-img
               :src="logo"
               class="brand-logo"
@@ -162,7 +160,7 @@
             Show Passwords
           </b-form-checkbox>
           <span class="error-msg">{{ error2 }}</span>
-          <b-button type="submit" variant="primary">Register</b-button>
+          <b-button type="submit">Register</b-button>
         </b-form></b-tab
       >
     </b-tabs>
@@ -256,7 +254,8 @@ export default {
   color: red;
   font-size: 20px;
 }
-.tab-sign-in {
+.tab-sign-in,
+.form-sign-up {
   padding: 15px;
 }
 .form-sign-in * {
@@ -295,10 +294,59 @@ export default {
 
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
+    .tab-auth {
+    width: 55% !important;
+    padding: 5px;
+  }
+  .title-tab {
+    font-size: 20px !important;
+  }
+  .brand-logo {
+    width: 100px !important;
+  }
+  .error-msg {
+    color: rgb(243, 34, 34);
+    font-size: 25px;
+  }
+  .active-tab {
+    font-size: 20px !important;
+  }
 }
 
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
+  .tab-auth {
+    width: 100% !important;
+    padding: 5px;
+  }
+  .title-tab {
+    font-size: 20px !important;
+  }
+  .brand-logo {
+    width: 80px !important;
+  }
+  .avatar-user {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  .error-msg {
+    color: rgb(243, 34, 34);
+    font-size: 20px;
+  }
+  .tab-sign-in {
+    padding: 10px;
+  }
+  .uploader-photo {
+    background-color: transparent !important;
+    width: 100% !important;
+  }
+  .logo-container {
+    text-align: center;
+    padding: 5px;
+  }
+  .active-tab {
+    font-size: 20px !important;
+  }
 }
 
 /*Small Phone from 0 to 480px*/
