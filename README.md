@@ -14,9 +14,11 @@ Try to be the typing race master by leveling up.
 Try it! [Typing Race ](https://typing-race-app.netlify.app/)
 
 # Getting Start
-## Project setup
 ```
-* git clone https://github.com/sevillecarlos/imposible-hang-man.git or Download the zip.
+git clone https://github.com/sevillecarlos/imposible-hang-man.git
+```
+### or Download the zip.
+## Project setup
 ```
 npm install
 ```
@@ -29,4 +31,19 @@ npm run serve
 npm run build
 ```
 ## Typing Race Server
+Navigate to [Typing Race Server ](https://github.com/sevillecarlos/typing-race-beckend) to found the server for the app.
+
+# Author
+## Carlos Alberto Sevilla Fernandez
+* Github: [@sevillecarlos](https://github.com/sevillecarlos)
+* LinkedIn: [Carlos Alberto Sevilla Fernandez](https://github.com/sevillecarlos)
+
+# Contributing
+Contributions, issues and feature requests are welcome!
+Feel free to check the [Issues Page](https://github.com/sevillecarlos/imposible-hang-man/issues).
+
+# License
+This project is [MIT](https://opensource.org/licenses/MIT) licensed.
+
+
 
