@@ -1,6 +1,7 @@
 # Typing Race
 Show your finger speed with Typing Race, type all possible words before time runs out.
 Try to be the typing race master by leveling up.
+![Typing Race Image!](/assets/images/typing-race.png "Typing Race")
 ## Project setup
 ```
 npm install
