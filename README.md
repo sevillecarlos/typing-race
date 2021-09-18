@@ -40,7 +40,7 @@ Navigate to [Typing Race Server ](https://github.com/sevillecarlos/typing-race-b
 
 # Contributing
 Contributions, issues and feature requests are welcome!
-Feel free to check the [Issues Page](https://github.com/sevillecarlos/imposible-hang-man/issues).
+Feel free to check the [Issues Page](https://github.com/sevillecarlos/typing-race/issues).
 
 # License
 This project is [MIT](https://opensource.org/licenses/MIT) licensed.
