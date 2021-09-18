@@ -1,5 +1,6 @@
-# typing-race
-
+# Typing Race
+Show your finger speed with Typing Race, type all possible words before time runs out.
+Try to be the typing race master by leveling up.
 ## Project setup
 ```
 npm install
