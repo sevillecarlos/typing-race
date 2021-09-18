@@ -20,6 +20,9 @@ export default {
       isLogin: false,
     };
   },
+  created() {
+    this.$store.dispatch("getToken");
+  },
   computed: {
     ...mapState({
       token: "token",
@@ -34,7 +37,7 @@ export default {
 </script>
 
 <style>
-.login{
+.login {
   padding: 20px;
 }
 .already-sigin {

@@ -14,15 +14,14 @@
           <div class="d-flex align-items-center">
             <div class="game-stop">
               <span class="timeout-msg">Your time finish</span>
-              <br />
               <button @click="restartGame" class="restart-btn">
-                Restart
+                Restart Game
               </button>
-              <br />
-              <span class="complete-word-msg"
-                >You complete {{ completeWordCounter }} words</span
-              >
-              <br />
+              <div>
+                <span class="complete-word-msg"
+                  >You complete {{ completeWordCounter }} words</span
+                >
+              </div>
               <div v-if="!token" class="not-sign-container">
                 <p class="not-sign-in-msg">
                   Not Sign In? Sign In, so you can up levels and become a typing
@@ -62,7 +61,7 @@
                 <span>Level:</span>
                 <span class="level">{{ userLevel }}</span>
               </span>
-              <div class="points-container">
+              <div class="user-level-point">
                 <span class="user-points"
                   >Points:<span class="points">{{ userPoints }}</span>
                 </span>
@@ -244,82 +243,80 @@ export default {
 </script>
 
 <style>
+/******************************/
+/**GAMEBOARD**/
 .game-board {
   margin-top: 5%;
   padding: 1%;
   background: #faa507fa !important;
   border-radius: 10px;
 }
-
 .game-container {
   margin-top: 2px;
   text-align: center;
-  font-size: 100px;
+  font-size: 5vw;
 }
-
+/******************************/
+/**WORD INPUT**/
 .word {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: rgb(0, 0, 0);
   font-weight: bold;
 }
-
 .correct-letter {
   color: #ffffff;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
-  font-size: 100px;
 }
 .input-word {
   padding: 15px;
   visibility: hidden;
 }
-.timeout-msg {
-  font-size: 65px;
-  font-weight: bold;
-}
+/******************************/
+/**USER POINTS AND LEVEL**/
 .user-points {
   color: black;
-  font-size: 20px;
+  font-size: 1vw;
 }
-
 .user-score-board {
   padding: 2%;
 }
-
+.user-level-score {
+  font-size: 1vw;
+  float: left;
+  color: black;
+}
 .level {
   font-weight: bold;
-  font-size: 25px;
+  font-size: 2vw;
   padding: 3px;
   text-align: justify !important;
   border-radius: 15px;
 }
-.user-level-score {
-  font-size: 20px;
-  float: left;
-  color: black;
-}
-.btn-container {
-  text-align: center;
-  padding: 10px;
-}
-.game-stop {
-  text-align: center;
-  padding: 15px;
-  color: black !important;
-}
-
-.points-container {
+.user-level-point {
   float: right;
 }
 .points {
   font-weight: bold;
-  font-size: 30px;
-  padding: 1px;
-  padding: 15px;
-
+  font-size: 2vw;
+  padding: 2%;
   border-radius: 15px;
+}
+/******************************/
+/**BUTTONS**/
+.btn-container {
+  text-align: center;
+  padding: 1%;
+}
+.game-stop {
+  text-align: center;
+  box-sizing: border-box;
+  color: black !important;
+}
+.game-stop *{
+  padding: 5px;
 }
 .start-btn {
   background: rgb(115, 255, 0) !important;
@@ -328,190 +325,56 @@ export default {
 .show-rules-btn {
   background: rgb(0, 153, 255);
 }
+.restart-btn {
+  background: rgb(115, 255, 0);
+}
+.pause-btn {
+  background: rgb(255, 0, 51);
+}
 
+/******************************/
+/**PREPARE START**/
 .prepare-msg-container {
-  font-size: 40px;
+  font-size: 2vw;
   color: black;
   font-weight: bold;
 }
 .prepare-time {
-  font-size: 80px;
+  font-size: 4vw;
   color: black;
+  font-weight: bold;
+}
+/******************************/
+/**FINISH GAME**/
+.timeout-msg {
+  font-size: 2.5vw;
   font-weight: bold;
 }
 
 .complete-word-msg {
   color: black;
-  font-size: 25px;
+  font-size: 1.5vw;
   font-weight: bold;
+  padding: 5px;
 }
+
+/******************************/
+/**FINISH GAME**/
 .overlay-content {
   text-align: center;
 }
 .pause-btn-container {
   text-align: center;
 }
-.restart-btn {
-  background: rgb(115, 255, 0) !important;
-  font-size: 20px;
-  font-weight: bold;
-  border: none;
-}
-.pause-btn {
-  font-size: 25px !important;
-  background: rgb(255, 0, 51) !important;
-}
-
-.not-sign-container * {
+.not-sign-container {
+  border-top: 2px solid black;
   color: rgb(0, 0, 0);
   font-weight: bold;
   padding: 10px;
+  font-size: 0.9vw;
 }
-.sign-in-link-overlay {
-  text-decoration: none;
-  color: black !important;
-  font-size: 20px;
-  letter-spacing: 1px;
-  font-weight: bold;
-  background: rgba(206, 14, 14, 0.507);
-  padding: 5px;
-}
-.sign-in-link-overlay:hover {
-  color: beige !important;
-}
+
 /***************************************************************************/
-/* Big tablets to 1200px*/
-@media only screen and (max-width: 1200px) {
-  .game-board {
-    margin-top: 1%;
-    padding: 25px;
-    background: #faa507fa !important;
-    border-radius: 10px;
-  }
-
-  .game-container {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 100px;
-  }
-
-  .word {
-    text-transform: uppercase;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-  }
-
-  .correct-letter {
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-weight: bold;
-    font-size: 100px;
-  }
-  .input-word {
-    padding: 15px;
-    visibility: hidden;
-  }
-
-  .timeout-msg {
-    font-size: 65px;
-    font-weight: bold;
-  }
-  .user-points {
-    color: black;
-    font-size: 20px;
-  }
-  .level-label {
-    font-weight: bold;
-    font-size: 25px;
-    padding: 3px;
-    text-align: justify !important;
-    border-radius: 15px;
-  }
-  .user-level-score {
-    font-size: 20px;
-    float: left;
-    color: black;
-  }
-  .btn-container {
-    text-align: center;
-    padding: 10px;
-  }
-  .game-stop {
-    text-align: center;
-    padding: 15px;
-    color: black !important;
-  }
-
-  .points-container {
-    float: right;
-  }
-  .points {
-    font-weight: bold;
-    font-size: 30px;
-    padding: 1px;
-    border-radius: 15px;
-  }
-  .start-btn {
-    background: rgb(115, 255, 0) !important;
-    margin-right: 10px;
-  }
-  .show-rules-btn {
-    background: rgb(0, 153, 255);
-  }
-
-  .prepare-msg-container {
-    font-size: 40px;
-    color: black;
-    font-weight: bold;
-  }
-  .prepare-time {
-    font-size: 80px;
-    color: black;
-    font-weight: bold;
-  }
-
-  .complete-word-msg {
-    color: black;
-    font-size: 25px;
-    font-weight: bold;
-  }
-  .overlay-content {
-    text-align: center;
-  }
-  .pause-btn-container {
-    text-align: center;
-  }
-  .restart-btn {
-    background: rgb(115, 255, 0) !important;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-  }
-  .pause-btn {
-    font-size: 25px !important;
-    background: rgb(255, 0, 51) !important;
-  }
-
-  .not-sign-container * {
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    padding: 10px;
-  }
-  .sign-in-link-overlay {
-    text-decoration: none;
-    color: black !important;
-    font-size: 20px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    background: rgba(206, 14, 14, 0.507);
-    padding: 5px;
-  }
-  .sign-in-link-overlay:hover {
-    color: beige !important;
-  }
-}
-
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
     .game-board {
@@ -529,8 +392,6 @@ export default {
   .game-container {
     margin-top: 2px;
   }
-
-
   .prepare-msg-container {
     font-size: 50px;
     color: black;
@@ -545,7 +406,6 @@ export default {
     font-size: 50px;
     font-weight: bold;
   }
-
   .game-stop {
     padding: 5px;
   }
@@ -558,7 +418,6 @@ export default {
   .complete-word-msg {
     font-size: 25px;
   }
-
   .user-points {
     color: black;
     font-size: 25px;
@@ -575,7 +434,6 @@ export default {
     float: left;
     color: black;
   }
-
   .points {
     font-weight: bold;
     font-size: 25px;
@@ -583,7 +441,6 @@ export default {
     border-radius: 15px;
   }
 }
-
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   .game-board {
@@ -601,8 +458,6 @@ export default {
   .game-container {
     margin-top: 2px;
   }
-
-
   .prepare-msg-container {
     font-size: 40px;
     color: black;
@@ -617,7 +472,6 @@ export default {
     font-size: 30px;
     font-weight: bold;
   }
-
   .game-stop {
     padding: 5px;
   }
@@ -630,7 +484,6 @@ export default {
   .complete-word-msg {
     font-size: 20px;
   }
-
   .user-points {
     color: black;
     font-size: 20px;
@@ -647,7 +500,6 @@ export default {
     float: left;
     color: black;
   }
-
   .points {
     font-weight: bold;
     font-size: 25px;
@@ -655,7 +507,6 @@ export default {
     border-radius: 15px;
   }
 }
-
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
   .game-board {
@@ -673,7 +524,6 @@ export default {
   .game-container {
     margin-top: 1px;
   }
-
   .start-btn {
     background: rgb(115, 255, 0) !important;
     margin-right: 10px;
@@ -681,7 +531,6 @@ export default {
   .show-rules-btn {
     background: rgb(0, 153, 255);
   }
-
   .prepare-msg-container {
     font-size: 30px;
     color: black;
@@ -696,7 +545,6 @@ export default {
     font-size: 25px;
     font-weight: bold;
   }
-
   .game-stop {
     padding: 5px;
   }
@@ -709,7 +557,6 @@ export default {
   .complete-word-msg {
     font-size: 15px;
   }
-
   .user-points {
     color: black;
     font-size: 15px;
@@ -726,7 +573,6 @@ export default {
     float: left;
     color: black;
   }
-
   .points {
     font-weight: bold;
     font-size: 25px;

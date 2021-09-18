@@ -68,7 +68,7 @@
         >Hi, {{ userName }} you restart from noob</span
       >
       <br />
-      <span>Good Luck!</span>
+      <span class="restart-modal-greeting-msg">Good Luck!</span>
     </b-modal>
   </div>
 </template>
@@ -117,11 +117,7 @@ export default {
 </script>
 
 <style>
-.restart-modal {
-  font-weight: bold !important;
-}
 .restart-modal-header {
-  font-size: 20px !important;
   background: #f58b00 !important;
   box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
@@ -132,10 +128,10 @@ export default {
   font-weight: bold;
   padding: 3px;
   background: #faa507fa !important;
-  font-size: 30px;
+  font-size: 1vw;
 }
 .dropdown-user {
-  font-size: 25px;
+  font-size: 1.4vw;
   letter-spacing: 1px;
   text-align: center;
   font-weight: bold;
@@ -145,10 +141,9 @@ export default {
   font-style: normal;
 }
 .user-photo {
-  width: 80px !important;
-  height: 80px !important;
+  width: 4vw !important;
+  height: 4vw !important;
   background-color: rgba(255, 0, 106, 0.253) !important;
-
   box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
@@ -160,7 +155,7 @@ export default {
 }
 
 .nav-bar {
-  padding: 15px;
+  padding: 1%;
   background: #f58b00 !important;
   border-radius: 10px !important;
   box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
@@ -168,24 +163,23 @@ export default {
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
 .brand {
-  font-size: 40px !important;
+  font-size: 2vw !important;
   color: black !important;
   font-weight: bold !important;
   margin-left: 25%;
 }
 .brand-logo-nav {
-  width: 100px;
-  padding: 5px;
+  width: 5vw;
+  padding: 1%;
 }
 
 .sign-link a {
   text-decoration: none;
   color: black !important;
-  font-size: 20px;
+  font-size: 1vw;
   letter-spacing: 1px;
   font-weight: bold;
   text-align: center;
-
   background: rgb(235, 252, 8);
   border-radius: 50px !important;
   padding: 10px !important;
@@ -200,10 +194,10 @@ export default {
 }
 
 .sign-out {
-  font-size: 15px !important;
+  font-size: 1vw !important;
 }
 .restart-game-item {
-  font-size: 15px !important;
+  font-size: 1vw !important;
   margin-bottom: 10px;
   padding: 10px !important;
   background-color: #ff3333 !important;
@@ -213,22 +207,24 @@ export default {
 }
 
 .menu-user-profile {
-  padding: 5px !important;
+  padding: 10% !important;
   border: none !important;
   background: #faa507fa !important;
   border-radius: 15px !important;
   text-align: center !important;
+  font-size: 1vw !important;
   box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
+
 .confirmation-restart-collapse {
-  background: rgba(0, 0, 0, 0.932) !important;
   border-radius: 15px !important;
   border: none !important;
 }
 .card-collapse {
   background: #f58b00 !important;
+  font-size: 1vw !important;
   border-radius: 15px !important;
   margin-bottom: 5px;
   border: none !important;
@@ -236,21 +232,21 @@ export default {
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
+
+.restart-modal-greeting-msg{
+  color: rgb(253, 253, 253);
+}
 .restart-modal-msg {
-  font-size: 20px;
+  font-size:1vw;
 }
 .restart {
   background: rgb(255, 0, 0) !important;
   margin-right: 10px;
-  font-size: 15px !important;
+  font-size: 1vw !important;
 }
 .cancel {
   background: rgb(238, 214, 170) !important;
-  font-size: 15px !important;
-}
-
-/* Big tablets to 1200px*/
-@media only screen and (max-width: 1200px) {
+  font-size: 1vw !important;
 }
 
 /* Small tablets to big tablets: from 768 to 1032*/
@@ -265,7 +261,6 @@ export default {
     font-size: 30px;
   }
 }
-
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   .nav-bar {
@@ -284,7 +279,6 @@ export default {
   .toggle-nav-bar {
     width: 50px;
   }
-
   .restart-modal {
     font-weight: bold !important;
   }
@@ -309,14 +303,12 @@ export default {
     width: 50px !important;
     height: 50px !important;
   }
-
   .sign-link a {
     font-size: 20px;
     width: 30%;
     margin: auto;
     padding: 10px !important;
   }
-
   .sign-out {
     font-size: 13px !important;
   }
@@ -329,11 +321,9 @@ export default {
   .restart-game-item:hover {
     background: rgba(189, 163, 163, 0.932);
   }
-
   .card-collapse {
     font-size: 15px;
   }
-
   .restart {
     background: rgb(255, 0, 0) !important;
     margin-right: 10px;
@@ -344,7 +334,6 @@ export default {
     font-size: 12px !important;
   }
 }
-
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
   .nav-bar {
@@ -363,7 +352,6 @@ export default {
   .toggle-nav-bar {
     width: 50px;
   }
-
   .restart-modal {
     font-weight: bold !important;
   }
@@ -388,7 +376,6 @@ export default {
     width: 50px !important;
     height: 50px !important;
   }
-
   .sign-link a {
     font-size: 15px;
     width: 30%;
@@ -400,7 +387,6 @@ export default {
     -webkit-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
     -moz-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
   }
-
   .sign-out {
     font-size: 13px !important;
   }
@@ -413,11 +399,9 @@ export default {
   .restart-game-item:hover {
     background: rgba(189, 163, 163, 0.932);
   }
-
   .card-collapse {
     font-size: 15px;
   }
-
   .restart {
     background: rgb(255, 0, 0) !important;
     margin-right: 10px;

@@ -48,6 +48,8 @@ export default {
 };
 </script>
 <style>
+/******************************/
+/**SIDEBAR**/
 #sidebar-1 {
   background-color: #faa507fa !important;
   border-top-right-radius: 15px;
@@ -57,13 +59,13 @@ export default {
   text-align: center;
 }
 .logo-image {
-  width: 100px;
+  width: 5vw;
 }
 .level-ranking,
 .instructions {
   margin-top: 5%;
   text-align: center;
-  font-size: 20px;
+  font-size: 1vw;
 }
 .level-ranking h5,
 .instructions h5 {
@@ -73,23 +75,23 @@ export default {
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   text-align: center;
-  padding: 5px;
+  padding: 1%;
   border-radius: 50px;
-  font-size: 25px;
+  font-size: 1.5vw;
 }
 
 .def {
-  font-size: 20px;
+  font-size: 1vw;
 }
 .sign-in-link {
   text-decoration: none;
   color: black !important;
-  font-size: 20px;
+  font-size: 1vw;
   letter-spacing: 1px;
   font-weight: bold;
   background: rgb(235, 252, 8);
   border-radius: 50px !important;
-  padding: 15px;
+  padding: 5%;
   box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
@@ -100,14 +102,11 @@ export default {
   -moz-box-shadow: 0px -1px 11px -2px rgba(255, 255, 255, 0.75);
 }
 .sign-in-container {
-  margin-top: 50px;
+  margin-top: 20%;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.4vw;
 }
 
-/* Big tablets to 1200px*/
-@media only screen and (max-width: 1200px) {
-}
 
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {

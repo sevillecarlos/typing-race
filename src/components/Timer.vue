@@ -55,8 +55,10 @@ export default {
 </script>
 
 <style>
+/******************************/
+/**TIMER**/
 .time {
-  font-size: 40px;
+  font-size: 2vw;
   color: black;
   font-weight: bold;
 }

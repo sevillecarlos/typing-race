@@ -22,9 +22,6 @@ export default {
   padding: 10px;
   width: 75%;
 }
-/* Big tablets to 1200px*/
-@media only screen and (max-width: 1200px) {
-}
 
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {

@@ -22,6 +22,7 @@ export default new Vuex.Store({
     prepareTimePause: false,
     error: "",
     error2: "",
+    loadAuth:false
   },
   mutations: {
     setTime(state, payload) {
@@ -66,9 +67,13 @@ export default new Vuex.Store({
     setError2(state, payload) {
       state.error2 = payload;
     },
+    setLoadAuth(state,payload){
+      state.loadAuth = payload
+    }
   },
   actions: {
     async signIn({ commit }, payload) {
+      commit('setLoadAuth',true)
       try {
         const res = await axios.post(
           `${process.env.VUE_APP_URL}/signin`,
@@ -82,11 +87,14 @@ export default new Vuex.Store({
           commit("setToken", jwtToken);
           localStorage.setItem("@uth", jwtToken);
         }
+        commit('setLoadAuth',false)
       } catch (error) {
         console.log(error);
       }
     },
     async signUp({ commit }, payload) {
+      commit('setLoadAuth',true)
+
       try {
         const res = await axios.post(`${process.env.VUE_APP_URL}/signup`, payload);
         const data = await res.data;
@@ -97,6 +105,7 @@ export default new Vuex.Store({
           commit("setToken", jwtToken);
           localStorage.setItem("@uth", jwtToken);
         }
+        commit('setLoadAuth',false)
       } catch (error) {
         console.log(error);
       }
