@@ -26,10 +26,6 @@ npm install
 ```
 npm run serve
 ```
-### Compiles and minifies for production
-```
-npm run build
-```
 ## Typing Race Server
 Navigate to [Typing Race Server ](https://github.com/sevillecarlos/typing-race-beckend) to found the server for the app.
 
