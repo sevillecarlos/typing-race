@@ -14,6 +14,14 @@
     <div v-else>
       <router-view />
     </div>
+    <div class="footer">
+      <p>
+        Code by
+        <a href="https://github.com/sevillecarlos" target="blank"
+          >@sevillecarlos</a
+        >
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -102,17 +110,31 @@ body::-webkit-scrollbar-thumb {
   background: #faa507fa !important;
   border-radius: 10px;
 }
-
-/* Small tablets to big tablets: from 768 to 1032*/
-@media only screen and (max-width: 1032px) {
-  #app {
-    width: 100%;
-    margin: auto;
-  }
-  button {
-    padding: 15px;
-    font-size: 25px !important;
-  }
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  font-size: 0.9vw;
+  padding: 0.3%;
+}
+.footer p {
+  border-radius: 100px;
+  padding: 1%;
+  width: 15%;
+  margin: auto;
+  background: #f58b00 !important;
+}
+.footer a {
+  text-decoration: none;
+  color: black;
+}
+.footer a:hover {
+  color: #46361afa;
 }
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {

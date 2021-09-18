@@ -233,11 +233,11 @@ export default {
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
 }
 
-.restart-modal-greeting-msg{
+.restart-modal-greeting-msg {
   color: rgb(253, 253, 253);
 }
 .restart-modal-msg {
-  font-size:1vw;
+  font-size: 1vw;
 }
 .restart {
   background: rgb(255, 0, 0) !important;
@@ -249,16 +249,12 @@ export default {
   font-size: 1vw !important;
 }
 
-/* Small tablets to big tablets: from 768 to 1032*/
-@media only screen and (max-width: 1032px) {
+@media only screen and (max-width: 1035px) {
   .sign-link a {
-    font-size: 30px;
-    width: 30%;
+    font-size: 10px;
+    width: 15%;
     margin: auto;
     padding: 10px !important;
-  }
-  .dropdown-user {
-    font-size: 30px;
   }
 }
 /* Small phones to small tablets: from 481 to 767*/

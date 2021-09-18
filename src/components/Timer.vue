@@ -63,13 +63,6 @@ export default {
   font-weight: bold;
 }
 
-/* Small tablets to big tablets: from 768 to 1032*/
-@media only screen and (max-width: 1032px) {
-  .time {
-    font-size: 40px;
-  }
-}
-
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   .time {

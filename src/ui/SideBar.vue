@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="level-ranking">
-        <h5><strong>Level</strong></h5>
+        <h5><strong>Levels</strong></h5>
         <p><strong>noob</strong> x 0 points</p>
         <p><strong>pro</strong> x 50 points</p>
         <p><strong>master</strong> x 60 points</p>
@@ -59,30 +59,18 @@ export default {
   text-align: center;
 }
 .logo-image {
-  width: 5vw;
+  width: 10vw;
 }
 .level-ranking,
 .instructions {
   margin-top: 5%;
-  text-align: center;
-  font-size: 1vw;
 }
 .level-ranking h5,
 .instructions h5 {
   color: black;
-  background: #f58b00;
-  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
-  text-align: center;
-  padding: 1%;
-  border-radius: 50px;
-  font-size: 1.5vw;
+  width: 50%;
 }
 
-.def {
-  font-size: 1vw;
-}
 .sign-in-link {
   text-decoration: none;
   color: black !important;
@@ -107,36 +95,15 @@ export default {
   font-size: 1.4vw;
 }
 
-
-/* Small tablets to big tablets: from 768 to 1032*/
-@media only screen and (max-width: 1032px) {
-  
-  .sign-in-link {
-    font-size: 25px;
-    padding: 20px;
-  }
-  .sign-in-container {
-    margin-top: 50px;
-    font-weight: bold;
-    font-size: 25px;
-  }
-}
-
+/***************************************************************************/
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
-    #sidebar-1 {
-    width: 50%;
-  }
   .logo-image-container {
     text-align: center;
-  }
-  .logo-image {
-    width: 90px;
   }
   .level-ranking,
   .instructions {
     margin-top: 3%;
-    text-align: center;
     font-size: 15px;
   }
   .level-ranking h5,
@@ -149,8 +116,8 @@ export default {
     font-size: 15px;
   }
   .sign-in-link {
-    font-size: 20px;
-    padding: 15px;
+    font-size: 15px;
+    padding: 10px;
   }
   .sign-in-container {
     margin-top: 20px;
@@ -161,9 +128,6 @@ export default {
 
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
-  #sidebar-1 {
-    width: 50%;
-  }
   .logo-image-container {
     text-align: center;
   }
@@ -173,7 +137,6 @@ export default {
   .level-ranking,
   .instructions {
     margin-top: 2%;
-    text-align: center;
     font-size: 12px;
   }
   .level-ranking h5,
