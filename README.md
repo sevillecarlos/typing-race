@@ -1,5 +1,5 @@
 # Typing Race
-Show your finger speed with Typing Race, type all possible words before time runs out.
+Show your finger speed with Typing Race, type all possible words before time runs out.<br>
 Try to be the typing race master by leveling up.
 
 ![Typing Race Image!](/assets/images/typing-race-image.png "Typing Race")
