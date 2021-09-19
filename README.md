@@ -27,9 +27,7 @@ npm install
 npm run serve
 ```
 ### Create your .env file for the environment variables
-* *USER_DB*
-* *PASSWORD_DB*
-* *DATABASE_NAME*
+* *VUE_APP_URL*
 
 ## Typing Race Server
 Navigate to [Typing Race Server ](https://github.com/sevillecarlos/typing-race-beckend) to found the server for the app.
