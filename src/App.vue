@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <div class="ribbon">
+      <a href="https://github.com/sevillecarlos/typing-race" target="_blank">
+        @sevillecarlos🍒
+      </a>
+    </div>
     <div class="mobile-msg" v-if="isMobile()">
       <span
         >This app is only for computers
@@ -13,14 +18,6 @@
     </div>
     <div v-else>
       <router-view />
-    </div>
-    <div class="footer">
-      <p>
-        Code by
-        <a href="https://github.com/sevillecarlos" target="blank"
-          >@sevillecarlos</a
-        >
-      </p>
     </div>
   </div>
 </template>
@@ -87,19 +84,51 @@ button[type="submit"] {
   background: rgb(115, 255, 0) !important;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0.7vw;
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #faa507fa !important;
   border-radius: 20px;
 }
 
+.ribbon {
+  background: #f58b00 !important;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  left: -50px;
+  top: 40px;
+
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+}
+.ribbon a {
+  border: 1px solid rgb(255, 255, 255);
+  color: black;
+  display: block;
+  font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 1px 0;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0 3px #444;
+}
+.ribbon a:hover{
+  color: rgb(255, 255, 255);
+
+}
 .mobile-msg {
   text-align: center;
   padding: 20px;
@@ -110,32 +139,7 @@ body::-webkit-scrollbar-thumb {
   background: #faa507fa !important;
   border-radius: 10px;
 }
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  font-weight: bold;
-  text-align: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  font-size: 0.9vw;
-  padding: 0.3%;
-}
-.footer p {
-  border-radius: 100px;
-  padding: 1%;
-  width: 15%;
-  margin: auto;
-  background: #f58b00 !important;
-}
-.footer a {
-  text-decoration: none;
-  color: black;
-}
-.footer a:hover {
-  color: #46361afa;
-}
+
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   #app {

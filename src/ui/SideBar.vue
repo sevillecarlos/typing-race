@@ -1,14 +1,12 @@
 <template>
   <b-sidebar no-header id="sidebar-1" title="Typing Race Rules" shadow>
     <div class="px-3 py-2">
-      <div class="logo-image-container">
-        <b-img
-          :src="logo"
-          fluid
-          class="logo-image"
-          alt="Typing-Race Logo"
-        ></b-img>
-      </div>
+      <b-img
+        :src="logo"
+        class="brand-logo-nav instruction"
+        fluid
+        alt="Logo Image Typing Race"
+      ></b-img>
 
       <div class="instructions">
         <h5><strong>Instructions</strong></h5>
@@ -58,9 +56,7 @@ export default {
 .logo-image-container {
   text-align: center;
 }
-.logo-image {
-  width: 10vw;
-}
+
 .level-ranking,
 .instructions {
   margin-top: 5%;
@@ -94,10 +90,15 @@ export default {
   font-weight: bold;
   font-size: 1.4vw;
 }
-
+.instruction {
+  margin: auto !important;
+}
 /***************************************************************************/
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
+    #sidebar-1{
+    width: 50% !important;
+  }
   .logo-image-container {
     text-align: center;
   }
@@ -109,25 +110,23 @@ export default {
   .level-ranking h5,
   .instructions h5 {
     padding: 1px;
-    font-size: 20px;
+    font-size: 25px;
   }
 
-  .def {
-    font-size: 15px;
-  }
   .sign-in-link {
-    font-size: 15px;
-    padding: 10px;
+    font-size: 20px;
+    padding: 15px;
   }
   .sign-in-container {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
+  #sidebar-1{
+    width: 50% !important;
+  }
   .logo-image-container {
     text-align: center;
   }
