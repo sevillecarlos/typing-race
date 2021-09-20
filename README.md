@@ -8,7 +8,7 @@ Try to be the typing race master by leveling up.
 ## Development Technologies
 - Vue.js 
 ## Libraries
-- BootstapVue
+- BootstrapVue
 
 # Live Demo
 Try it! [Typing Race ](https://typing-race-app.netlify.app/)
