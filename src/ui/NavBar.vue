@@ -65,10 +65,9 @@
       title="Restart Game"
     >
       <span class="restart-modal-msg"
-        >Hi, {{ userName }} you restart from noob</span
+        >Hi {{ userName }}, you restart from noob</span
       >
       <br />
-      <span class="restart-modal-greeting-msg">Good Luck!</span>
     </b-modal>
   </div>
 </template>

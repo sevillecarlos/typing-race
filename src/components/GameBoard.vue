@@ -379,7 +379,7 @@ export default {
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
   .game-board {
-    margin-top: 30%;
+    margin-top: 10%;
     padding: 5px;
   }
   .restart-btn {
@@ -445,7 +445,7 @@ export default {
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   .game-board {
-    margin-top: 30%;
+    margin-top: 15%;
     padding: 5px;
   }
   .restart-btn {
