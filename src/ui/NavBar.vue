@@ -252,7 +252,7 @@ export default {
 @media only screen and (max-width: 1035px) {
   .sign-link a {
     font-size: 10px;
-    width: 15%;
+    width: 10vw;
     margin: auto;
     padding: 10px !important;
   }

@@ -315,7 +315,7 @@ export default {
   box-sizing: border-box;
   color: black !important;
 }
-.game-stop *{
+.game-stop * {
   padding: 5px;
 }
 .start-btn {
@@ -375,10 +375,77 @@ export default {
 }
 
 /***************************************************************************/
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .game-board {
+    margin-top: 30%;
+    padding: 5px;
+  }
+  .restart-btn {
+    font-size: 20px !important;
+  }
+  .word,
+  .correct-letter {
+    font-size: 60px;
+    letter-spacing: 1px;
+  }
+  .game-container {
+    margin-top: 2px;
+  }
+  .prepare-msg-container {
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+  }
+  .prepare-time {
+    font-size: 45px;
+    color: black;
+    font-weight: bold;
+  }
+  .timeout-msg {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .game-stop {
+    padding: 5px;
+  }
+  .not-sign-container * {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 1px;
+    font-size: 20px;
+  }
+  .complete-word-msg {
+    font-size: 20px;
+  }
+  .user-points {
+    color: black;
+    font-size: 20px;
+  }
+  .level {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    text-align: justify !important;
+    border-radius: 15px;
+  }
+  .user-level-score {
+    font-size: 20px;
+    float: left;
+    color: black;
+  }
+  .points {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1px;
+    border-radius: 15px;
+  }
+}
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   .game-board {
-    margin-top: 3%;
+    margin-top: 30%;
     padding: 5px;
   }
   .restart-btn {
@@ -444,7 +511,7 @@ export default {
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
   .game-board {
-    margin-top: 1%;
+    margin-top: 30%;
     padding: 1px;
   }
   .restart-btn {

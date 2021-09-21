@@ -140,6 +140,15 @@ button[type="submit"] {
   border-radius: 10px;
 }
 
+/************************************************************/
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+#app {
+    width: 80%;
+    margin: auto;
+  }
+}
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   #app {
@@ -149,6 +158,21 @@ button[type="submit"] {
   button {
     padding: 15px;
     font-size: 20px !important;
+  }
+    .ribbon {
+    left: -40px;
+    top: 15px;
+    -webkit-transform: rotate(-40deg);
+    -moz-transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg);
+    -o-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+  }
+  .ribbon a {
+    font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    margin: 2px 0;
+    padding: 5px 30px;
   }
 }
 /*Small Phone from 0 to 480px*/
@@ -160,6 +184,21 @@ button[type="submit"] {
   button {
     padding: 10px;
     font-size: 15px !important;
+  }
+    .ribbon {
+    left: -40px;
+    top: 15px;
+    -webkit-transform: rotate(-40deg);
+    -moz-transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg);
+    -o-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+  }
+  .ribbon a {
+    font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    margin: 2px 0;
+    padding: 5px 30px;
   }
 }
 </style>
