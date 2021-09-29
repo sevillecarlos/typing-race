@@ -7,6 +7,7 @@ Try to be the typing race master by leveling up.
 # Built
 ## Development Technologies
 - Vue.js 
+- Vuex
 ## Libraries
 - BootstrapVue
 
