@@ -77,7 +77,11 @@
               ><span class="word">{{ word }}</span>
             </div>
             <div v-if="!startGame" class="btn-container">
-              <button :disabled="!word" @click="startCounter" class="start-btn">
+              <button
+                :disabled="word === '...Loading'"
+                @click="startCounter"
+                class="start-btn"
+              >
                 Start Game
               </button>
 
@@ -99,6 +103,14 @@
               </button>
             </div>
           </div>
+          <div class="sound-container">
+            <b-icon
+              :icon="playGameMusic ? 'volume-up-fill' : 'volume-mute-fill'"
+              @click="playGameMusic = !playGameMusic"
+              variant="dark"
+              class="sound-icon"
+            ></b-icon>
+          </div>
         </b-overlay>
       </b-overlay>
     </div>
@@ -111,6 +123,17 @@ import Timer from "./Timer.vue";
 import SideBar from "../ui/SideBar.vue";
 import NavBar from "../ui/NavBar.vue";
 import { mapState } from "vuex";
+
+import gameMusic from "../assets/game-music.wav";
+import timeCountSound from "../assets/time-count-sound.wav";
+import gamePauseSound from "../assets/pause-game-sound.wav";
+
+
+const gameAudio = new Audio(gameMusic);
+const timeCountAudio = new Audio(timeCountSound);
+const gamePauseAudio = new Audio(gamePauseSound);
+
+
 export default {
   name: "GameBoard",
   components: {
@@ -120,7 +143,7 @@ export default {
   },
   data() {
     return {
-      word: "",
+      word: "...Loading",
       nextWord: "",
       verifyWord: "",
       correctsLetter: "",
@@ -129,12 +152,14 @@ export default {
       completeWordCounter: 0,
       showPrepare: false,
       showRules: false,
+      playGameMusic: true,
     };
   },
   async created() {
     this.word = await this.getWord();
     this.verifyWord = this.word;
     this.token && this.$store.dispatch("getUserGameData", this.userEmail);
+    gameAudio.loop = true;
   },
   methods: {
     async getWord() {
@@ -164,6 +189,7 @@ export default {
       this.nextWord = await this.getWord();
     },
     async restartGame() {
+      gameAudio.volume = 1;
       if (this.token) {
         this.$store.dispatch("addUserGameData", {
           email: this.userEmail,
@@ -186,6 +212,8 @@ export default {
 
     startCounter() {
       this.showPrepare = true;
+      gameAudio.volume = 0.05;
+
       this.prepareTimeCounter("setStartGame", true);
     },
     prepareTimeCounter(mutation, value) {
@@ -232,8 +260,25 @@ export default {
     verifyWord() {
       this.getNextWord();
     },
+    playGameMusic() {
+      if (this.playGameMusic) {
+        gameAudio.play();
+      } else {
+        gameAudio.pause();
+      }
+    },
+    time() {
+      timeCountAudio.play();
+    },
+    pauseGame() {
+      if (this.pauseGame) {
+        gamePauseAudio.volume = 0.8;
+        gamePauseAudio.play();
+      }
+    },
   },
   mounted() {
+    gameAudio.play();
     window.addEventListener("keypress", (ev) => {
       if (this.startGameKeyEvent && !this.pauseGame)
         this.prepareTime === 0 && this.checkWord(ev.key.toLowerCase());
@@ -256,6 +301,16 @@ export default {
   text-align: center;
   font-size: 5vw;
 }
+.sound-container {
+  text-align: right;
+  padding: 5px;
+  font-size: 2vw;
+}
+.sound-icon:hover {
+  color: rgb(88, 86, 84) !important;
+  cursor: pointer;
+}
+
 /******************************/
 /**WORD INPUT**/
 .word {
@@ -441,6 +496,10 @@ export default {
     padding: 1px;
     border-radius: 15px;
   }
+    .sound-container {
+  font-size: 3vw;
+}
+
 }
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
@@ -507,6 +566,10 @@ export default {
     padding: 1px;
     border-radius: 15px;
   }
+    .sound-container {
+  font-size: 5vw;
+}
+
 }
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
@@ -580,5 +643,8 @@ export default {
     padding: 1px;
     border-radius: 15px;
   }
+  .sound-container {
+  font-size: 5vw;
+}
 }
 </style>

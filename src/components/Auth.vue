@@ -334,9 +334,9 @@ export default {
   -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
   text-align: center;
-  color: black;
+  color: rgb(73, 72, 72);
   font-weight: bold;
-  background: chartreuse;
+  background: rgb(224, 224, 224);
   width: 50%;
   padding: 1%;
   font-size: 1vw;

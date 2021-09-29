@@ -220,6 +220,7 @@ export default {
 .confirmation-restart-collapse {
   border-radius: 15px !important;
   border: none !important;
+  display: inline-block;
 }
 .card-collapse {
   background: #f58b00 !important;
@@ -239,7 +240,7 @@ export default {
   font-size: 1vw;
 }
 .restart {
-  background: rgb(255, 0, 0) !important;
+  background: rgb(214, 10, 10) !important;
   margin-right: 10px;
   font-size: 1vw !important;
 }

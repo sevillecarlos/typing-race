@@ -1,6 +1,6 @@
 <template>
   <b-sidebar no-header id="sidebar-1" title="Typing Race Rules" shadow>
-    <div class="px-3 py-2">
+    <div class="instruction-container">
       <b-img
         :src="logo"
         class="brand-logo-nav instruction"
@@ -11,7 +11,7 @@
       <div class="instructions">
         <h5><strong>Instructions</strong></h5>
         <p>
-          Try to type all the words possible after the timer turn to 0
+          Try to type all the words possible before the timer turn to 0
         </p>
       </div>
       <div class="level-ranking">
@@ -49,11 +49,25 @@ export default {
 /******************************/
 /**SIDEBAR**/
 #sidebar-1 {
-  background-color: #faa507fa !important;
+  background-color: #faa50700 !important;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0) !important;
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0);
 }
 .logo-image-container {
+  text-align: center;
+}
+.instruction-container {
+  border-radius: 20px;
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  background: #f58b00 !important;
+  padding: 1%;
+  width: 95%;
+  margin: 5vw auto;
   text-align: center;
 }
 
@@ -64,7 +78,6 @@ export default {
 .level-ranking h5,
 .instructions h5 {
   color: black;
-  width: 50%;
 }
 
 .sign-in-link {
@@ -96,7 +109,7 @@ export default {
 /***************************************************************************/
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
-    #sidebar-1{
+  #sidebar-1 {
     width: 50% !important;
   }
   .logo-image-container {
@@ -124,7 +137,7 @@ export default {
 
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
-  #sidebar-1{
+  #sidebar-1 {
     width: 50% !important;
   }
   .logo-image-container {
