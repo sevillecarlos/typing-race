@@ -128,11 +128,9 @@ import gameMusic from "../assets/game-music.wav";
 import timeCountSound from "../assets/time-count-sound.wav";
 import gamePauseSound from "../assets/pause-game-sound.wav";
 
-
 const gameAudio = new Audio(gameMusic);
 const timeCountAudio = new Audio(timeCountSound);
 const gamePauseAudio = new Audio(gamePauseSound);
-
 
 export default {
   name: "GameBoard",
@@ -155,11 +153,14 @@ export default {
       playGameMusic: true,
     };
   },
+  beforeCreate() {
+    gameAudio.loop = true;
+    gameAudio.play();
+  },
   async created() {
     this.word = await this.getWord();
     this.verifyWord = this.word;
     this.token && this.$store.dispatch("getUserGameData", this.userEmail);
-    gameAudio.loop = true;
   },
   methods: {
     async getWord() {
@@ -262,7 +263,7 @@ export default {
     },
     playGameMusic() {
       if (this.playGameMusic) {
-        gameAudio.play();
+        // gameAudio.play();
       } else {
         gameAudio.pause();
       }
@@ -277,8 +278,8 @@ export default {
       }
     },
   },
+
   mounted() {
-    gameAudio.play();
     window.addEventListener("keypress", (ev) => {
       if (this.startGameKeyEvent && !this.pauseGame)
         this.prepareTime === 0 && this.checkWord(ev.key.toLowerCase());
@@ -496,10 +497,9 @@ export default {
     padding: 1px;
     border-radius: 15px;
   }
-    .sound-container {
-  font-size: 3vw;
-}
-
+  .sound-container {
+    font-size: 3vw;
+  }
 }
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
@@ -566,10 +566,9 @@ export default {
     padding: 1px;
     border-radius: 15px;
   }
-    .sound-container {
-  font-size: 5vw;
-}
-
+  .sound-container {
+    font-size: 5vw;
+  }
 }
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
@@ -644,7 +643,7 @@ export default {
     border-radius: 15px;
   }
   .sound-container {
-  font-size: 5vw;
-}
+    font-size: 5vw;
+  }
 }
 </style>
