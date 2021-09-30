@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import logo from "../assets/logo-typing-race.png";
+import logo from "../assets/image/logo-typing-race.png";
 import { mapState } from "vuex";
 export default {
   data() {

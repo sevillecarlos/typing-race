@@ -187,7 +187,7 @@
 
 <script>
 import { mapState } from "vuex";
-import logoImage from "../assets/logo-typing-race.png";
+import logoImage from "../assets/image/logo-typing-race.png";
 
 export default {
   data() {

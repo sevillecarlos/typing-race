@@ -124,9 +124,9 @@ import SideBar from "../ui/SideBar.vue";
 import NavBar from "../ui/NavBar.vue";
 import { mapState } from "vuex";
 
-import gameMusic from "../assets/game-music.wav";
-import timeCountSound from "../assets/time-count-sound.wav";
-import gamePauseSound from "../assets/pause-game-sound.wav";
+import gameMusic from "../assets/music/game-music.wav";
+import timeCountSound from "../assets/music/time-count-sound.wav";
+import gamePauseSound from "../assets/music/pause-game-sound.wav";
 
 const gameAudio = new Audio(gameMusic);
 const timeCountAudio = new Audio(timeCountSound);

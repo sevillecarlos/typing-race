@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import logo from "../src/assets/logo-typing-race.png";
+import logo from "../src/assets/image/logo-typing-race.png";
 export default {
   data() {
     return {

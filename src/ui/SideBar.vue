@@ -30,7 +30,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import logo from "../assets/logo-typing-race.png";
+import logo from "../assets/image/logo-typing-race.png";
 export default {
   name: "SideBar",
   data() {
