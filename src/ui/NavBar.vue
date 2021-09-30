@@ -38,6 +38,7 @@
             <b-collapse class="confirmation-restart-collapse" id="collapse-2">
               <b-card class="card-collapse"
                 >Are you sure to restart?
+                <br>
                 <b-button
                   v-b-toggle="'collapse-2'"
                   class="restart button"

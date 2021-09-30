@@ -153,11 +153,9 @@ export default {
       playGameMusic: true,
     };
   },
-  beforeCreate() {
+  async created() {
     gameAudio.loop = true;
     gameAudio.play();
-  },
-  async created() {
     this.word = await this.getWord();
     this.verifyWord = this.word;
     this.token && this.$store.dispatch("getUserGameData", this.userEmail);
@@ -263,7 +261,7 @@ export default {
     },
     playGameMusic() {
       if (this.playGameMusic) {
-        // gameAudio.play();
+        gameAudio.play();
       } else {
         gameAudio.pause();
       }
