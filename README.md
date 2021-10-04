@@ -2,6 +2,18 @@
 Show your finger speed with Typing Race, type all possible words before time runs out.<br>
 Try to be the typing race master by leveling up.
 
+### Instructions
+Try to type all the words possible before the timer turn to 0
+
+### Levels
+noob x 0 points
+
+pro x 50 points
+
+master x 60 points
+
+hacker x 70 points
+
 ![Typing Race Image!](/assets/images/typing-race-image.png "Typing Race")
 
 # Built
