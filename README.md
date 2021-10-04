@@ -16,7 +16,7 @@ Try it! [Typing Race ](https://typing-race-app.netlify.app/)
 
 # Getting Start
 ```
-git clone https://github.com/sevillecarlos/imposible-hang-man.git
+git clone https://github.com/sevillecarlos/typing-race.git
 ```
 ### or Download the zip.
 ## Project setup
