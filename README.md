@@ -3,7 +3,7 @@ Show your finger speed with Typing Race, type all possible words before time run
 Try to be the typing race master by leveling up.
 
 ### Instructions
-**Try to type all the words possible before the timer turn to 0**
+*Try to type all the words possible before the timer turn to 0*
 
 ### Levels
 * **noob** x 0 points
