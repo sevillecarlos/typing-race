@@ -18,11 +18,9 @@
 
 # Built
 ## Development Technologies
-- Vue.js 
-- Vuex
-## Libraries
-- BootstrapVue
-
+![](https://img.shields.io/badge/Front--End-Vue-green)
+![](https://img.shields.io/badge/Progamming--Language-JavaScript-yellow)
+![](https://img.shields.io/badge/Library-Vuex-green)
 # Live Demo
 Try it! [Typing Race ](https://typing-race-app.netlify.app/)
 
