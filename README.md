@@ -3,7 +3,7 @@
 > Try to be the typing race master by leveling up.
 
 ### Instructions
-*Try to type all the words possible before the timer turn to zero*
+> *Try to type all the words possible before the timer turn to zero*
 
 ### Levels
 * **noob** x 0 points
